@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Shield : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	public GameObject shieldFlarePrefab;
+
+	void OnCollisionEnter (Collision collision)
+    {
+        ContactPoint contact = collision.contacts[0];
+        Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
+        Vector3 pos = contact.point;
+        Instantiate(shieldFlarePrefab, pos, rot);
+    }
 }
