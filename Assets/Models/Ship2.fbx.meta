@@ -1,57 +1,57 @@
 fileFormatVersion: 2
-guid: 68e2280090c733c41af35d1afd2e76ca
-timeCreated: 1520127651
+guid: 218b76ba9a011594eababdd1c99d3e16
+timeCreated: 1520128806
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: Array
-    100004: Body
-    100006: Bridge
-    100008: Head
-    100010: Neck
-    100012: Port_Engine
-    100014: Port_Wing
-    100016: Starboard_Engine
-    100018: Starboard_Wing
-    400000: //RootNode
-    400002: Array
-    400004: Body
-    400006: Bridge
-    400008: Head
-    400010: Neck
-    400012: Port_Engine
-    400014: Port_Wing
-    400016: Starboard_Engine
-    400018: Starboard_Wing
-    2100000: unnamed
+    100000: Array
+    100002: Body
+    100004: Bridge
+    100006: Head
+    100008: Neck
+    100010: Port Engine
+    100012: Port Wing
+    100014: //RootNode
+    100016: Starboard Engine
+    100018: Starboard Wing
+    400000: Array
+    400002: Body
+    400004: Bridge
+    400006: Head
+    400008: Neck
+    400010: Port Engine
+    400012: Port Wing
+    400014: //RootNode
+    400016: Starboard Engine
+    400018: Starboard Wing
+    2100000: No Name
     2300000: Array
     2300002: Body
     2300004: Bridge
     2300006: Head
     2300008: Neck
-    2300010: Port_Engine
-    2300012: Port_Wing
-    2300014: Starboard_Engine
-    2300016: Starboard_Wing
+    2300010: Port Engine
+    2300012: Port Wing
+    2300014: Starboard Engine
+    2300016: Starboard Wing
     3300000: Array
     3300002: Body
     3300004: Bridge
     3300006: Head
     3300008: Neck
-    3300010: Port_Engine
-    3300012: Port_Wing
-    3300014: Starboard_Engine
-    3300016: Starboard_Wing
-    4300000: Starboard_Wing
-    4300002: Starboard_Engine
-    4300004: Port_Engine
+    3300010: Port Engine
+    3300012: Port Wing
+    3300014: Starboard Engine
+    3300016: Starboard Wing
+    4300000: Starboard Wing
+    4300002: Starboard Engine
+    4300004: Port Engine
     4300006: Array
     4300008: Bridge
     4300010: Head
     4300012: Neck
-    4300014: Port_Wing
+    4300014: Port Wing
     4300016: Body
   externalObjects: {}
   materials:
