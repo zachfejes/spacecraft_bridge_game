@@ -78,6 +78,7 @@ GameObject:
   - component: {fileID: 114560531461700010}
   - component: {fileID: 114148273120135392}
   - component: {fileID: 114458377253808116}
+  - component: {fileID: 114498562576896086}
   m_Layer: 0
   m_Name: Player Ship
   m_TagString: Untagged
@@ -96,6 +97,7 @@ GameObject:
   - component: {fileID: 33694134852258892}
   - component: {fileID: 23773201032709012}
   - component: {fileID: 64924586096591698}
+  - component: {fileID: 114692052399724442}
   m_Layer: 0
   m_Name: Shield
   m_TagString: Untagged
@@ -182,7 +184,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1226418215304388}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.71, y: 0, z: 0}
+  m_LocalPosition: {x: 5.71, y: 0, z: -58.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4758145903928100}
@@ -796,6 +798,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   health: 100
+--- !u!114 &114498562576896086
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1226418215304388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b43d3e31c61fe984c9bd702fab3e1001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shields: []
+  shieldStrength: []
+  shieldFlarePrefab: {fileID: 4880428309648702, guid: 562ad0dc70cd0194eb16ad7874c910de,
+    type: 2}
 --- !u!114 &114560531461700010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -813,3 +830,15 @@ MonoBehaviour:
   inputRoll: 0
   inputPitch: 0
   inputYaw: 0
+--- !u!114 &114692052399724442
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1256203848850626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51424641bc76fb6419b069400ab36c67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxShieldHP: 100

@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: 33407197442865930}
   - component: {fileID: 23217236207890550}
   - component: {fileID: 64764859563492296}
+  - component: {fileID: 114524527924843468}
   m_Layer: 0
   m_Name: Shield
   m_TagString: Untagged
@@ -218,6 +219,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4459816978429086}
   - component: {fileID: 54915432989872710}
+  - component: {fileID: 114034481903129210}
   m_Layer: 0
   m_Name: Station
   m_TagString: Untagged
@@ -1435,8 +1437,8 @@ Rigidbody:
   m_GameObject: {fileID: 1470054864656106}
   serializedVersion: 2
   m_Mass: 1000000
-  m_Drag: 0
-  m_AngularDrag: 0
+  m_Drag: 1
+  m_AngularDrag: 1
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -1644,7 +1646,7 @@ MeshCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1185655048643608}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 24b3c64e800ea9447a759f7a664e4184, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1708,3 +1710,30 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300044, guid: a07b15bda19ed7542b61b288921d5660, type: 3}
+--- !u!114 &114034481903129210
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1470054864656106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b43d3e31c61fe984c9bd702fab3e1001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shields: []
+  shieldStrength: []
+  shieldFlarePrefab: {fileID: 4880428309648702, guid: 562ad0dc70cd0194eb16ad7874c910de,
+    type: 2}
+--- !u!114 &114524527924843468
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1185655048643608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51424641bc76fb6419b069400ab36c67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxShieldHP: 1000
