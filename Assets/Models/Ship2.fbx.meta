@@ -15,6 +15,7 @@ ModelImporter:
     100014: //RootNode
     100016: Starboard Engine
     100018: Starboard Wing
+    100020: Shield
     400000: Array
     400002: Body
     400004: Bridge
@@ -25,6 +26,7 @@ ModelImporter:
     400014: //RootNode
     400016: Starboard Engine
     400018: Starboard Wing
+    400020: Shield
     2100000: No Name
     2300000: Array
     2300002: Body
@@ -35,6 +37,7 @@ ModelImporter:
     2300012: Port Wing
     2300014: Starboard Engine
     2300016: Starboard Wing
+    2300018: Shield
     3300000: Array
     3300002: Body
     3300004: Bridge
@@ -44,6 +47,7 @@ ModelImporter:
     3300012: Port Wing
     3300014: Starboard Engine
     3300016: Starboard Wing
+    3300018: Shield
     4300000: Starboard Wing
     4300002: Starboard Engine
     4300004: Port Engine
@@ -53,6 +57,7 @@ ModelImporter:
     4300012: Neck
     4300014: Port Wing
     4300016: Body
+    4300018: Shield
   externalObjects: {}
   materials:
     importMaterials: 1

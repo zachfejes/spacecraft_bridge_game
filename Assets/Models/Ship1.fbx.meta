@@ -18,6 +18,7 @@ ModelImporter:
     100020: Saucer
     100022: Starboard Connector
     100024: Starboard Engine
+    100026: Shield
     400000: Cube
     400002: Cube.001
     400004: Cylinder
@@ -31,6 +32,7 @@ ModelImporter:
     400020: Saucer
     400022: Starboard Connector
     400024: Starboard Engine
+    400026: Shield
     2100000: No Name
     2300000: Cube
     2300002: Cube.001
@@ -44,6 +46,7 @@ ModelImporter:
     2300018: Saucer
     2300020: Starboard Connector
     2300022: Starboard Engine
+    2300024: Shield
     3300000: Cube
     3300002: Cube.001
     3300004: Cylinder
@@ -56,6 +59,7 @@ ModelImporter:
     3300018: Saucer
     3300020: Starboard Connector
     3300022: Starboard Engine
+    3300024: Shield
     4300000: Cube.001
     4300002: Cube
     4300004: Cylinder.002
@@ -68,6 +72,7 @@ ModelImporter:
     4300018: Port Engine
     4300020: Body
     4300022: Saucer
+    4300024: Shield
   externalObjects: {}
   materials:
     importMaterials: 1
