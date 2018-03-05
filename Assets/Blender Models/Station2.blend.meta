@@ -24,6 +24,25 @@ ModelImporter:
     100032: Cylinder_013
     100034: Cylinder_014
     100036: //RootNode
+    100038: Body
+    100040: Connector_A
+    100042: Connector_B
+    100044: Connector_C
+    100046: Corridor_A
+    100048: Corridor_B
+    100050: Corridor_C
+    100052: Docking_Bay
+    100054: Hat_A
+    100056: Hat_B
+    100058: Hat_C
+    100060: Main_Hat
+    100062: Main_Saucer
+    100064: Neck
+    100066: Saucer_A
+    100068: Saucer_B
+    100070: Saucer_C
+    100072: Shield
+    100074: Waist
     400000: Cube
     400002: Cube_001
     400004: Cube_002
@@ -43,6 +62,25 @@ ModelImporter:
     400032: Cylinder_013
     400034: Cylinder_014
     400036: //RootNode
+    400038: Body
+    400040: Connector_A
+    400042: Connector_B
+    400044: Connector_C
+    400046: Corridor_A
+    400048: Corridor_B
+    400050: Corridor_C
+    400052: Docking_Bay
+    400054: Hat_A
+    400056: Hat_B
+    400058: Hat_C
+    400060: Main_Hat
+    400062: Main_Saucer
+    400064: Neck
+    400066: Saucer_A
+    400068: Saucer_B
+    400070: Saucer_C
+    400072: Shield
+    400074: Waist
     2100000: unnamed
     2300000: Cube
     2300002: Cube_001
@@ -62,6 +100,25 @@ ModelImporter:
     2300030: Cylinder_012
     2300032: Cylinder_013
     2300034: Cylinder_014
+    2300036: Body
+    2300038: Connector_A
+    2300040: Connector_B
+    2300042: Connector_C
+    2300044: Corridor_A
+    2300046: Corridor_B
+    2300048: Corridor_C
+    2300050: Docking_Bay
+    2300052: Hat_A
+    2300054: Hat_B
+    2300056: Hat_C
+    2300058: Main_Hat
+    2300060: Main_Saucer
+    2300062: Neck
+    2300064: Saucer_A
+    2300066: Saucer_B
+    2300068: Saucer_C
+    2300070: Shield
+    2300072: Waist
     3300000: Cube
     3300002: Cube_001
     3300004: Cube_002
@@ -80,6 +137,25 @@ ModelImporter:
     3300030: Cylinder_012
     3300032: Cylinder_013
     3300034: Cylinder_014
+    3300036: Body
+    3300038: Connector_A
+    3300040: Connector_B
+    3300042: Connector_C
+    3300044: Corridor_A
+    3300046: Corridor_B
+    3300048: Corridor_C
+    3300050: Docking_Bay
+    3300052: Hat_A
+    3300054: Hat_B
+    3300056: Hat_C
+    3300058: Main_Hat
+    3300060: Main_Saucer
+    3300062: Neck
+    3300064: Saucer_A
+    3300066: Saucer_B
+    3300068: Saucer_C
+    3300070: Shield
+    3300072: Waist
     4300000: Cylinder_014
     4300002: Cube_002
     4300004: Cylinder_013
@@ -98,6 +174,25 @@ ModelImporter:
     4300030: Cylinder_002
     4300032: Cylinder_001
     4300034: Cylinder
+    4300036: Shield
+    4300038: Corridor_C
+    4300040: Connector_C
+    4300042: Saucer_C
+    4300044: Hat_C
+    4300046: Hat_B
+    4300048: Saucer_B
+    4300050: Connector_B
+    4300052: Corridor_B
+    4300054: Corridor_A
+    4300056: Connector_A
+    4300058: Saucer_A
+    4300060: Hat_A
+    4300062: Main_Hat
+    4300064: Waist
+    4300066: Docking_Bay
+    4300068: Neck
+    4300070: Body
+    4300072: Main_Saucer
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}
