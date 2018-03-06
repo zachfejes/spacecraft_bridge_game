@@ -5,37 +5,28 @@ using UnityEditor;
 
 public class ScannerManager : MonoBehaviour {
 
-	public float normalScanningRange;
-	public float longScanningRange;
-	private float scanFrequency = 1.0f;
-	private float lastScan;
-
+	public Scanner[] scanners;
 	public List<GameObject> trackedObjects = new List<GameObject>();
 
-	void Start() {
-		lastScan = Time.time;
+	void Start () {
+		scanners = transform.GetComponentsInChildren<Scanner>();
+
+		for(int i = 0; i < scanners.Length; i++) {
+			scanners[i].SetScannerManager(this);
+		}
 	}
 
 	void Update() {
-		PassiveScan();
-	}
+		trackedObjects.Clear();
 
-	void PassiveScan() {
-		if(Time.time - lastScan > scanFrequency) {
-			Collider[] hitColliders = Physics.OverlapSphere(transform.position, normalScanningRange);
+		for(int i = 0; i < scanners.Length; i++) {
+			for(int j = 0; j < scanners[i].GetTrackedObjects().Count; j++) {
+				bool alreadyTracked = trackedObjects.Contains(scanners[i].GetTrackedObjects()[j]);
 
-			trackedObjects.Clear();
-			
-			for(int i = 0; i < hitColliders.Length; i++) {
-				GameObject tempObject = hitColliders[i].attachedRigidbody.gameObject;
-				bool alreadyTracked = trackedObjects.Contains(tempObject);
-
-				if(!alreadyTracked && tempObject != gameObject) {
-					trackedObjects.Add(tempObject);
+				if(!alreadyTracked && scanners[i].GetTrackedObjects()[j] != gameObject) {
+					trackedObjects.Add(scanners[i].GetTrackedObjects()[j]);
 				}
 			}
-
-			lastScan = Time.time;
 		}
 	}
 
@@ -43,16 +34,5 @@ public class ScannerManager : MonoBehaviour {
 		return trackedObjects;
 	}
 
-	void OnDrawGizmosSelected() {
-			UnityEditor.Handles.color = Color.blue;
-			UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, normalScanningRange);
-
-			UnityEditor.Handles.color = Color.blue;
-			UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, longScanningRange);
-
-			for(int i = 0; i < trackedObjects.Count; i++) {
-				UnityEditor.Handles.DrawWireDisc(trackedObjects[i].transform.position, Vector3.up, 5.0f);
-			}
-    }
 
 }
