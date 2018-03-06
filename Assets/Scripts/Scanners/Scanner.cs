@@ -10,6 +10,8 @@ public class Scanner : MonoBehaviour {
 	private float frequency = 1.0f;
 	private List<GameObject> trackedObjects = new List<GameObject>();
 
+	private bool passive;
+
 	public float GetRange() {
 		return range;
 	}
@@ -36,6 +38,14 @@ public class Scanner : MonoBehaviour {
 
 	public void SetTrackedObjects(List<GameObject> newTrackedObjects) {
 		trackedObjects = newTrackedObjects;
+	}
+
+	public bool GetPassive() {
+		return passive;
+	}
+
+	public void SetPassive(bool isPassive) {
+		passive = isPassive;
 	}
 
 }

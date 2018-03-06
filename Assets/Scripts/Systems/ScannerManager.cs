@@ -7,6 +7,8 @@ public class ScannerManager : MonoBehaviour {
 
 	public Scanner[] scanners;
 	public List<GameObject> trackedObjects = new List<GameObject>();
+	private float inputScan = 0;
+	private GameObject target;
 
 	void Start () {
 		scanners = transform.GetComponentsInChildren<Scanner>();
@@ -15,7 +17,6 @@ public class ScannerManager : MonoBehaviour {
 			scanners[i].SetScannerManager(this);
 		}
 	}
-
 	void Update() {
 		trackedObjects.Clear();
 
@@ -28,6 +29,26 @@ public class ScannerManager : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	public void SetInputScan(float value) {
+		inputScan = value;
+
+		for(int i = 0; i < scanners.Length; i++) {
+			if(!scanners[i].GetPassive()) {
+				if(value == 0) {
+					scanners[i].SetTrackedObjects(new List<GameObject>());
+					scanners[i].enabled = false;
+				}
+				else {
+					scanners[i].enabled = true;
+				}
+			}
+		}
+	}
+
+	public void SetTarget(GameObject newTarget) {
+		target = newTarget;
 	}
 
 	public List<GameObject> GetTrackedObjects() {

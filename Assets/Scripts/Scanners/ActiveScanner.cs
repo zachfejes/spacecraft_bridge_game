@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class PassiveScanner : Scanner {
+public class ActiveScanner : Scanner {
     private float lastScan;
 
     void Start() {
-        SetPassive(true);
+        SetPassive(false);
 		lastScan = Time.time;
 	}
 
 	void Update() {
-		PassiveScan();
+		ActiveScan();
 	}
 
-    void PassiveScan() {
+    void ActiveScan() {
 		if(Time.time - lastScan > GetFrequency()) {
 			Collider[] hitColliders = Physics.OverlapSphere(transform.position, GetRange());
 
@@ -37,14 +37,16 @@ public class PassiveScanner : Scanner {
 	}
 
     void OnDrawGizmosSelected() {
-        UnityEditor.Handles.color = Color.blue;
-        UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, range);
+        if(this.enabled) {
+            UnityEditor.Handles.color = Color.blue;
+            UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, range);
 
-        UnityEditor.Handles.color = Color.blue;
-        UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, range);
+            UnityEditor.Handles.color = Color.blue;
+            UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, range);
 
-        for(int i = 0; i < GetTrackedObjects().Count; i++) {
-            UnityEditor.Handles.DrawWireDisc(GetTrackedObjects()[i].transform.position, Vector3.up, 5.0f);
+            for(int i = 0; i < GetTrackedObjects().Count; i++) {
+                UnityEditor.Handles.DrawWireDisc(GetTrackedObjects()[i].transform.position, Vector3.up, 5.0f);
+            }
         }
     }
 }

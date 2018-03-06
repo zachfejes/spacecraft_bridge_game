@@ -5,14 +5,16 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
 	public SpaceFlightController flightControl;
-	public WeaponsManager weaponsControl;
+	public WeaponsManager weaponsManager;
+	public ScannerManager scannerManager;
 
 	// Use this for initialization
 	void Start () {
 		flightControl = transform.GetComponent<SpaceFlightController>();
-		weaponsControl = transform.GetComponent<WeaponsManager>();
+		weaponsManager = transform.GetComponent<WeaponsManager>();
+		scannerManager = transform.GetComponent<ScannerManager>();
 
-		weaponsControl.SetPlayerWeapon(true);
+		weaponsManager.SetPlayerWeapon(true);
 	}
 	
 	// Update is called once per frame
@@ -26,8 +28,12 @@ public class PlayerController : MonoBehaviour {
 			flightControl.SetYaw(Input.GetAxis("Yaw"));
 		}
 
-		if(weaponsControl) {
-			weaponsControl.SetInputFire(Input.GetAxis("Fire"));
+		if(weaponsManager) {
+			weaponsManager.SetInputFire(Input.GetAxis("Fire"));
+		}
+
+		if(scannerManager) {
+			scannerManager.SetInputScan(Input.GetAxis("Scan"));
 		}
 	}
 }
