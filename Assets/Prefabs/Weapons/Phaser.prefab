@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114991705655009612}
   - component: {fileID: 120250032090154788}
   m_Layer: 8
-  m_Name: Phaser_Directed
+  m_Name: Phaser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
