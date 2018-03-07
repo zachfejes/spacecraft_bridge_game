@@ -143,6 +143,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 894355cbff64c4748b252480be4cf9dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputFire: 0
+  target: {fileID: 0}
+  weaponsManager: {fileID: 0}
+  playerWeapon: 0
   emissionObject: {fileID: 4314076356421988}
   firingArcAngle: 80
 --- !u!120 &120595180832938884
