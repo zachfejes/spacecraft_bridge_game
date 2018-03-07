@@ -44,7 +44,9 @@ public class PassiveScanner : Scanner {
         UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, range);
 
         for(int i = 0; i < GetTrackedObjects().Count; i++) {
-            UnityEditor.Handles.DrawWireDisc(GetTrackedObjects()[i].transform.position, Vector3.up, 5.0f);
+			if(GetTrackedObjects()[i]) {
+            	UnityEditor.Handles.DrawWireDisc(GetTrackedObjects()[i].transform.position, Vector3.up, 5.0f);
+			}
         }
     }
 }
