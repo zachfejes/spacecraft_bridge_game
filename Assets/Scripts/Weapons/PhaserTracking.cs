@@ -103,7 +103,7 @@ public class PhaserTracking : Weapon {
 		if(hit.collider && hit.collider.attachedRigidbody.transform.GetComponent<DamageManager>()) {
 
 			if(Time.time - previousTime >= damageRate) {
-				if(hit.collider.attachedRigidbody.transform.GetComponent<DamageManager>().damage(1.0f)) {
+				if(hit.collider.attachedRigidbody.transform.GetComponent<DamageManager>().Damage(1.0f)) {
 					SetTargetDestroyed();
 				}
 				previousTime = Time.time;

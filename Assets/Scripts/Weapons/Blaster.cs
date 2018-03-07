@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Blaster : Weapon {
 
-	private float speed = 1.0f;
+	private float speed = 30.0f;
 	private float previousTime;
 
 	private float damage = 5.0f;
 	
-	private float frequency = 1.0f;
+	private float frequency = 0.2f;
 
 	public Rigidbody blasterBolt;
 	ParticleSystem[] hitEffect;
@@ -28,7 +28,15 @@ public class Blaster : Weapon {
 
 	void fireBlaster() {
 		if(Time.time - previousTime >= frequency) {
-			Rigidbody newBolt = (Rigidbody) GameObject.Instantiate(blasterBolt);
+			Rigidbody newBolt = (Rigidbody) GameObject.Instantiate(blasterBolt, transform.position, Quaternion.FromToRotation(Vector3.forward, transform.forward));
+			Collider[] colliders = weaponsManager.gameObject.GetComponentsInChildren<Collider>();
+
+			foreach (Collider collider in colliders) {
+				Physics.IgnoreCollision(newBolt.transform.GetComponent<Collider>(), collider);
+			}
+			
+			newBolt.transform.GetComponent<BlasterBolt>().SetDamage(damage);
+
 			newBolt.velocity = speed*transform.forward;
 
 			previousTime = Time.time;
