@@ -56,23 +56,52 @@ public class Phaser : Weapon {
 
 		lineRenderer.SetPosition(0, transform.position);
 
-		if(hit.collider && hit.collider.attachedRigidbody.transform.GetComponent<DamageManager>()) {
-			if(Time.time - previousTime >= damageRate) {
-				if(hit.collider.attachedRigidbody.transform.GetComponent<DamageManager>().Damage(1.0f)) {
-					SetTargetDestroyed();
+		if(hit.collider) {
+			Shield hitShield = hit.collider.transform.GetComponent<Shield>();
+			DamageManager hitDamageManager = hit.collider.attachedRigidbody.transform.GetComponent<DamageManager>();
+
+			if(hitShield) {
+				if(Time.time - previousTime >= damageRate) {
+					hitShield.DamageShield(1.0f);
+					previousTime = Time.time;
 				}
-				previousTime = Time.time;
-			}
 
-			lineRenderer.SetPosition(1, hit.point);
-			emissionObject.position = hit.point;
+				lineRenderer.SetPosition(1, hit.point);
+				emissionObject.position = hit.point;
 
-			foreach(ParticleSystem effect in endEffects) {
-				if(effect.isStopped) {
-					effect.Play(true);
+				foreach(ParticleSystem effect in endEffects) {
+					if(effect.isStopped) {
+						effect.Play(true);
+					}
 				}
 			}
+			else if(hitDamageManager) {
+				if(Time.time - previousTime >= damageRate) {
+					if(hit.collider.attachedRigidbody.transform.GetComponent<DamageManager>().Damage(1.0f)) {
+						SetTargetDestroyed();
+					}
+					previousTime = Time.time;
+				}
 
+				lineRenderer.SetPosition(1, hit.point);
+				emissionObject.position = hit.point;
+
+				foreach(ParticleSystem effect in endEffects) {
+					if(effect.isStopped) {
+						effect.Play(true);
+					}
+				}
+
+			}
+			else {
+				lineRenderer.SetPosition(1, transform.position + transform.forward * maxRange);
+
+				foreach(ParticleSystem effect in endEffects) {
+					if(effect.isPlaying) {
+						effect.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+					}
+				}
+			}
 		}
 		else {
 			lineRenderer.SetPosition(1, transform.position + transform.forward * maxRange);

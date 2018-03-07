@@ -140,9 +140,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1051174165959140}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99f1926700419c1468af6a299a338944, type: 3}
+  m_Script: {fileID: 11500000, guid: 1bdcbc5450c75ff41bb1dc103243509d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputFire: 0
+  target: {fileID: 0}
+  weaponsManager: {fileID: 0}
+  playerWeapon: 0
   emissionObject: {fileID: 4532365347906764}
 --- !u!120 &120250032090154788
 LineRenderer:
@@ -292,7 +296,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1456473856
+  randomSeed: -767797819
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3659,7 +3663,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1896623619
+  randomSeed: -1515087038
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6180,7 +6184,7 @@ ParticleSystem:
   LightsModule:
     enabled: 1
     ratio: 1
-    light: {fileID: 108902130109695236, guid: 34a51003a830454459def8284e0268a2, type: 2}
+    light: {fileID: 0}
     randomDistribution: 1
     color: 1
     range: 1
