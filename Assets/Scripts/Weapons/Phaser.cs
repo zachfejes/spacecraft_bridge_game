@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent (typeof(LineRenderer))]
 
-public class PhaserStraight : Weapon {
+public class Phaser : Weapon {
 
 	private float maxRange = 50.0f;
 	private float noise = 1.0f;

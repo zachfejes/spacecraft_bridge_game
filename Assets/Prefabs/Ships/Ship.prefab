@@ -197,6 +197,8 @@ GameObject:
   - component: {fileID: 33345906358903418}
   - component: {fileID: 23172765627362682}
   - component: {fileID: 64305117112864208}
+  - component: {fileID: 114984682635206224}
+  - component: {fileID: 114627884988418586}
   m_Layer: 0
   m_Name: Array
   m_TagString: Untagged
@@ -1098,6 +1100,18 @@ MonoBehaviour:
   inputFire: 0
   target: {fileID: 0}
   playerWeapon: 0
+--- !u!114 &114627884988418586
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1760741231661180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42beb02b6172e424981885c64833fd00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 200
 --- !u!114 &114726064980451164
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1130,8 +1144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2ec4804be6d721499393e9c1481dc03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalScanningRange: 100
-  longScanningRange: 0
+  scanners: []
   trackedObjects: []
 --- !u!114 &114952044268162136
 MonoBehaviour:
@@ -1165,6 +1178,18 @@ MonoBehaviour:
   inputRoll: 0
   inputPitch: 0
   inputYaw: 0
+--- !u!114 &114984682635206224
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1760741231661180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80fdf346e290f484eb06c15c6902348b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 100
 --- !u!114 &114995713344222634
 MonoBehaviour:
   m_ObjectHideFlags: 1
