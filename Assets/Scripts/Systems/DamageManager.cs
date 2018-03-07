@@ -7,7 +7,7 @@ public class DamageManager : MonoBehaviour {
 	public float maxHealth = 100.0f;
 	public float health = 100.0f;
 
-	public bool damage(float value) {
+	public bool Damage(float value) {
 		health = health - value;
 
 		if(health <= 0) {
@@ -20,7 +20,7 @@ public class DamageManager : MonoBehaviour {
 		}
 	}
 
-	public void heal(float value) {
+	public void Heal(float value) {
 		health = health + value;
 
 		if(health > maxHealth) {

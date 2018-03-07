@@ -79,6 +79,7 @@ GameObject:
   - component: {fileID: 114148273120135392}
   - component: {fileID: 114458377253808116}
   - component: {fileID: 114498562576896086}
+  - component: {fileID: 114839406938328302}
   m_Layer: 0
   m_Name: Player Ship
   m_TagString: Untagged
@@ -170,6 +171,8 @@ GameObject:
   - component: {fileID: 33699149953359118}
   - component: {fileID: 23763338445440306}
   - component: {fileID: 64166454081238100}
+  - component: {fileID: 114172044199060712}
+  - component: {fileID: 114029676786739666}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -184,7 +187,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1226418215304388}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.71, y: 0, z: -58.1}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4758145903928100}
@@ -757,6 +760,18 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300024, guid: 868a6d8957054fe4f95871ce17d533ef, type: 3}
+--- !u!114 &114029676786739666
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1483062934117586}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42beb02b6172e424981885c64833fd00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 200
 --- !u!114 &114148273120135392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -772,6 +787,18 @@ MonoBehaviour:
   inputFire: 0
   target: {fileID: 0}
   playerWeapon: 0
+--- !u!114 &114172044199060712
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1483062934117586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80fdf346e290f484eb06c15c6902348b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 100
 --- !u!114 &114352550099041312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -784,7 +811,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flightControl: {fileID: 114560531461700010}
-  weaponsControl: {fileID: 114148273120135392}
+  weaponsManager: {fileID: 114148273120135392}
+  scannerManager: {fileID: 114839406938328302}
 --- !u!114 &114458377253808116
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -842,3 +870,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxShieldHP: 100
+--- !u!114 &114839406938328302
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1226418215304388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2ec4804be6d721499393e9c1481dc03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scanners: []
+  trackedObjects: []
