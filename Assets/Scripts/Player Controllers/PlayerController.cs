@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if(Input.GetKeyDown(KeyCode.T)) {
-			if(scannerManager && scannerManager.GetTrackedObjects() && scannerManager.GetTrackedObjects().Count > 0) {
+			if(scannerManager != null && scannerManager.GetTrackedObjects() != null && scannerManager.GetTrackedObjects().Count > 0) {
 				GameObject nearestObject = null;
 
 				for(int i = 0; i < scannerManager.GetTrackedObjects().Count; i++) {

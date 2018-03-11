@@ -894,7 +894,7 @@ MonoBehaviour:
   - {fileID: 1053704225}
   - {fileID: 48715508}
   - {fileID: 1417947485}
-  numberOfEnemies: 20
+  numberOfEnemies: 3
   playerShip: {fileID: 0}
   enemyShips: []
   gameOverPanel: {fileID: 1346054863}
