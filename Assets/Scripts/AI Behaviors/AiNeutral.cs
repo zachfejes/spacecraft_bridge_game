@@ -109,6 +109,25 @@ public class AiNeutral : MonoBehaviour
         }
     }
 
+	void OnDestroy() {
+		GameObject gameControllerObject = GameObject.FindWithTag ("GameController");
+		GameController gameController = null;
+
+        if (gameControllerObject != null)
+        {
+            gameController = gameControllerObject.GetComponent <GameController>();
+        }
+
+        if (gameController == null)
+        {
+            Debug.Log ("Cannot find 'GameController' script");
+        }
+		else {
+			gameController.ShipDestroyed(this);
+		}
+	}
+
+
     // Use this for initialization
     void Start()
     {

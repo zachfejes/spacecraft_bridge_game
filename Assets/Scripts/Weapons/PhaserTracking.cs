@@ -82,7 +82,6 @@ public class PhaserTracking : Weapon {
 	void firePhaser(Vector3 targetDirection) {
 
 		if(targetDirection == null) {
-			Debug.Log("No Target Direction Given");
 			return;
 		}
 
@@ -139,11 +138,11 @@ public class PhaserTracking : Weapon {
 
 			}
 			else {
-				Debug.Log("Target out of range");
+				//Target Out Of Range
 			}
 		}
 		else {
-			Debug.Log("Target out of range");
+			//Target Out Of Range
 		}
 
 	}

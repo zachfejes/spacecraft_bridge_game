@@ -36,7 +36,6 @@ public class ShieldManager : MonoBehaviour {
 
 		if(hitShield) {
 			float collisionForce = Vector3.Magnitude(collision.impulse/Time.fixedDeltaTime);
-			Debug.Log("Collision force: " + collisionForce);
 			hitShield.DamageShield(collisionForce/1000000);
 
 			Quaternion rot = Quaternion.FromToRotation(transform.forward, contact.normal);
