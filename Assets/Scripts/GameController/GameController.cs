@@ -20,6 +20,9 @@ public class GameController : MonoBehaviour
 
     public GameObject gameOverPanel;
 
+    public GameObject pauseGamePanel;
+
+
 
     void Awake()
     {
@@ -35,6 +38,10 @@ public class GameController : MonoBehaviour
         else if (enemyShips.Count == 0)
         {
 			GameOver("VICTORY");
+        }
+
+        if(Input.GetKeyDown(KeyCode.P)) {
+            TogglePaused();
         }
 
     }
@@ -80,5 +87,22 @@ public class GameController : MonoBehaviour
 		Scene scene = SceneManager.GetActiveScene(); 
         SceneManager.LoadScene(scene.name);
 	}
+
+    public void TogglePaused() {
+        if (pauseGamePanel)
+        {
+            if(pauseGamePanel.activeSelf) {
+                pauseGamePanel.SetActive(false);
+                Time.timeScale = 1;
+            }
+            else {
+                Time.timeScale = 0;
+                pauseGamePanel.SetActive(true);
+            }
+        }
+        else {
+            Debug.Log("pauseGamePanel does not exist");
+        }
+    }
 
 }
