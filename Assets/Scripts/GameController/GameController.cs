@@ -6,15 +6,13 @@ public class GameController : MonoBehaviour {
 
 	public GameObject playerShipPrefab;
 	public GameObject enemyShipPrefab;
-
-	public GameObject spacecraftParent;
 	public Transform playerSpawnPoint;
 	public Transform[] enemySpawnPoints;
 
 	public int numberOfEnemies = 0;
 
 	public GameObject playerShip;
-	public List<GameObject> enemyShips = new List<GameObject>();
+	public List<AiNeutral> enemyShips = new List<AiNeutral>();
 
 
 	void Awake() {
@@ -28,7 +26,9 @@ public class GameController : MonoBehaviour {
 			Vector3 spawnPosition = enemySpawnPoints[Random.Range(0, enemySpawnPoints.Length - 1)].position + new Vector3(Random.Range(-10, 10), Random.Range(-10,10), Random.Range(-10,10));
 			Quaternion spawnRotation = Quaternion.Euler(Random.Range(-180,180), Random.Range(-180,180),Random.Range(-180,180));
 
-			enemyShips.Add(GameObject.Instantiate(enemyShipPrefab, spawnPosition, spawnRotation));
+			enemyShips.Add(GameObject.Instantiate(enemyShipPrefab, spawnPosition, spawnRotation).GetComponent<AiNeutral>());
+			enemyShips[i].SetTarget(playerShip);
+			enemyShips[i].SetAction(ActionType.ATTACK_TARGET);
 		}
 	}
 
