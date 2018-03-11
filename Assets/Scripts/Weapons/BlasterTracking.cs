@@ -58,7 +58,6 @@ public class BlasterTracking : Weapon {
 	void fireBlaster(Vector3 targetDirection) {
 
 		if(targetDirection == null) {
-			Debug.Log("No Target Direction Given");
 			return;
 		}
 

@@ -8,6 +8,10 @@ public class PlayerController : MonoBehaviour {
 	public WeaponsManager weaponsManager;
 	public ScannerManager scannerManager;
 
+	void OnDestroy() {
+		transform.Find("Camera").transform.parent=null;
+	}
+
 	// Use this for initialization
 	void Start () {
 		flightControl = transform.GetComponent<SpaceFlightController>();
