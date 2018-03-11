@@ -73,8 +73,7 @@ public class GameController : MonoBehaviour
 	}
 
 	public void NavigateMainMenu() {
-		Scene scene = SceneManager.GetSceneByName("MenuScene");
-		SceneManager.LoadScene(scene.name);
+		SceneManager.LoadScene("Menu");
 	}
 
 	public void RestartGame() {
