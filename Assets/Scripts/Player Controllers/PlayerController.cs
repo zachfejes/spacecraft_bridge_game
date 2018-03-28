@@ -54,7 +54,6 @@ public class PlayerController : MonoBehaviour {
 				}
 				
 				weaponsManager.SetTarget(nearestObject);
-
 			}
 		}
 

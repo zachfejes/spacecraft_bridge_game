@@ -1,0 +1,202 @@
+fileFormatVersion: 2
+guid: ef55952f9f723b741aab1184ab545208
+timeCreated: 1522201803
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Body
+    100002: Circle
+    100004: Connector_A
+    100006: Connector_B
+    100008: Connector_C
+    100010: Corridor_A
+    100012: Corridor_B
+    100014: Corridor_C
+    100016: Docking_Bay
+    100018: Hat_A
+    100020: Hat_B
+    100022: Hat_C
+    100024: Main_Hat
+    100026: Main_Hat_001
+    100028: Main_Saucer
+    100030: Neck
+    100032: Saucer_A
+    100034: Saucer_B
+    100036: Saucer_C
+    100038: Shield
+    100040: //RootNode
+    100042: Top_Structure
+    100044: Waist
+    400000: Body
+    400002: Circle
+    400004: Connector_A
+    400006: Connector_B
+    400008: Connector_C
+    400010: Corridor_A
+    400012: Corridor_B
+    400014: Corridor_C
+    400016: Docking_Bay
+    400018: Hat_A
+    400020: Hat_B
+    400022: Hat_C
+    400024: Main_Hat
+    400026: Main_Hat_001
+    400028: Main_Saucer
+    400030: Neck
+    400032: Saucer_A
+    400034: Saucer_B
+    400036: Saucer_C
+    400038: Shield
+    400040: //RootNode
+    400042: Top_Structure
+    400044: Waist
+    2100000: unnamed
+    2300000: Body
+    2300002: Circle
+    2300004: Connector_A
+    2300006: Connector_B
+    2300008: Connector_C
+    2300010: Corridor_A
+    2300012: Corridor_B
+    2300014: Corridor_C
+    2300016: Docking_Bay
+    2300018: Hat_A
+    2300020: Hat_B
+    2300022: Hat_C
+    2300024: Main_Hat
+    2300026: Main_Hat_001
+    2300028: Main_Saucer
+    2300030: Neck
+    2300032: Saucer_A
+    2300034: Saucer_B
+    2300036: Saucer_C
+    2300038: Shield
+    2300040: Top_Structure
+    2300042: Waist
+    3300000: Body
+    3300002: Circle
+    3300004: Connector_A
+    3300006: Connector_B
+    3300008: Connector_C
+    3300010: Corridor_A
+    3300012: Corridor_B
+    3300014: Corridor_C
+    3300016: Docking_Bay
+    3300018: Hat_A
+    3300020: Hat_B
+    3300022: Hat_C
+    3300024: Main_Hat
+    3300026: Main_Hat_001
+    3300028: Main_Saucer
+    3300030: Neck
+    3300032: Saucer_A
+    3300034: Saucer_B
+    3300036: Saucer_C
+    3300038: Shield
+    3300040: Top_Structure
+    3300042: Waist
+    4300000: Circle
+    4300002: Main_Hat_001
+    4300004: Top_Structure
+    4300006: Shield
+    4300008: Corridor_C
+    4300010: Connector_C
+    4300012: Saucer_C
+    4300014: Hat_C
+    4300016: Hat_B
+    4300018: Saucer_B
+    4300020: Connector_B
+    4300022: Corridor_B
+    4300024: Corridor_A
+    4300026: Connector_A
+    4300028: Saucer_A
+    4300030: Hat_A
+    4300032: Main_Hat
+    4300034: Waist
+    4300036: Docking_Bay
+    4300038: Neck
+    4300040: Body
+    4300042: Main_Saucer
+    7400000: Default Take
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -9,6 +9,15 @@ public class WeaponsManager : MonoBehaviour {
 	public GameObject target;
 	public bool playerWeapon = false;
 
+    void OnDrawGizmosSelected() {
+		if(target != null) {
+            UnityEditor.Handles.color = Color.red;
+			UnityEditor.Handles.DrawWireDisc(target.transform.position, Vector3.up, 6.0f);
+			UnityEditor.Handles.DrawWireDisc(target.transform.position, Vector3.right, 6.0f);
+			UnityEditor.Handles.DrawWireDisc(target.transform.position, Vector3.forward, 6.0f);
+		}
+    }
+
 	// Use this for initialization
 	void Start () {
 		weapons = transform.GetComponentsInChildren<Weapon>();

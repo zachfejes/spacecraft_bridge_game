@@ -9,13 +9,19 @@ public class GameController : MonoBehaviour
 
     public GameObject playerShipPrefab;
     public GameObject enemyShipPrefab;
+
+    public GameObject[] asteroidPrefabs;
     public Transform playerSpawnPoint;
     public Transform[] enemySpawnPoints;
 
     public int numberOfEnemies = 0;
 
+    public int numberOfAsteroids = 0;
+
     public GameObject playerShip;
     public List<AiNeutral> enemyShips = new List<AiNeutral>();
+
+    public List<Rigidbody> asteroids = new List<Rigidbody>();
 
 
     public GameObject gameOverPanel;
@@ -33,14 +39,15 @@ public class GameController : MonoBehaviour
     {
         if (playerShip == null)
         {
-			GameOver("DEFEAT");
+            GameOver("DEFEAT");
         }
         else if (enemyShips.Count == 0)
         {
-			GameOver("VICTORY");
+            GameOver("VICTORY");
         }
 
-        if(Input.GetKeyDown(KeyCode.P)) {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
             TogglePaused();
         }
 
@@ -48,8 +55,18 @@ public class GameController : MonoBehaviour
 
     public void InitializeGame()
     {
-        playerShip = GameObject.Instantiate(playerShipPrefab, playerSpawnPoint.position, Quaternion.Euler(Random.Range(-180, 180), Random.Range(-180, 180), Random.Range(-180, 180)));
+        InitializePlayer();
+        InitializeEnemies();
+        InitializeEnvironment();
+    }
 
+    void InitializePlayer()
+    {
+        playerShip = GameObject.Instantiate(playerShipPrefab, playerSpawnPoint.position, Quaternion.Euler(Random.Range(-180, 180), Random.Range(-180, 180), Random.Range(-180, 180)));
+    }
+
+    void InitializeEnemies()
+    {
         for (int i = 0; i < numberOfEnemies; i++)
         {
             Vector3 spawnPosition = enemySpawnPoints[Random.Range(0, enemySpawnPoints.Length - 1)].position + new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), Random.Range(-10, 10));
@@ -61,7 +78,21 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void GameOver(string bannerText){
+    void InitializeEnvironment()
+    {
+        for (int i = 0; i < numberOfAsteroids; i++)
+        {
+            Vector3 spawnPosition = new Vector3(Random.Range(-100.0f, 100.0f), Random.Range(-100.0f, 100.0f), Random.Range(-100.0f, 100.0f));
+            Quaternion spawnRotation = Quaternion.Euler(Random.Range(-180, 180), Random.Range(-180, 180), Random.Range(-180, 180));
+
+            GameObject prefab = asteroidPrefabs[Random.Range(0, asteroidPrefabs.Length)];
+
+            asteroids.Add(GameObject.Instantiate(prefab, spawnPosition, spawnRotation).GetComponent<Rigidbody>());
+        }
+    }
+
+    public void GameOver(string bannerText)
+    {
         if (gameOverPanel && !gameOverPanel.activeSelf)
         {
             gameOverPanel.SetActive(true);
@@ -75,32 +106,39 @@ public class GameController : MonoBehaviour
         }
     }
 
-	public void ShipDestroyed(AiNeutral destroyedAI) {
-		enemyShips.Remove(destroyedAI);
-	}
+    public void ShipDestroyed(AiNeutral destroyedAI)
+    {
+        enemyShips.Remove(destroyedAI);
+    }
 
-	public void NavigateMainMenu() {
-		SceneManager.LoadScene("Menu");
-	}
+    public void NavigateMainMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
 
-	public void RestartGame() {
-		Scene scene = SceneManager.GetActiveScene(); 
+    public void RestartGame()
+    {
+        Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
-	}
+    }
 
-    public void TogglePaused() {
+    public void TogglePaused()
+    {
         if (pauseGamePanel)
         {
-            if(pauseGamePanel.activeSelf) {
+            if (pauseGamePanel.activeSelf)
+            {
                 pauseGamePanel.SetActive(false);
                 Time.timeScale = 1;
             }
-            else {
+            else
+            {
                 Time.timeScale = 0;
                 pauseGamePanel.SetActive(true);
             }
         }
-        else {
+        else
+        {
             Debug.Log("pauseGamePanel does not exist");
         }
     }
