@@ -5,12 +5,26 @@ using UnityEditor;
 
 public class ScannerManager : MonoBehaviour {
 
+    public GameObject targetInfoPrefab;
 	public Scanner[] scanners;
 	public List<GameObject> trackedObjects = new List<GameObject>();
 	private float inputScan = 0;
 	private GameObject target;
+	private RectTransform targetInfo;
 
 	void Start () {
+		if(targetInfoPrefab) {
+			GameObject canvas = GameObject.Find("Canvas");
+			if(canvas) {
+				GameObject newTargetInfo = GameObject.Instantiate(targetInfoPrefab);
+				newTargetInfo.transform.SetParent(canvas.transform);
+				newTargetInfo.GetComponent<StatusBars>().canvasRT = canvas.GetComponent<RectTransform>();
+				targetInfo = newTargetInfo.GetComponent<RectTransform>();
+				targetInfo.sizeDelta = new Vector2(0,0);
+				
+			}
+		}
+
 		scanners = transform.GetComponentsInChildren<Scanner>();
 
 		for(int i = 0; i < scanners.Length; i++) {
@@ -49,6 +63,11 @@ public class ScannerManager : MonoBehaviour {
 
 	public void SetTarget(GameObject newTarget) {
 		target = newTarget;
+
+		if(targetInfo) {
+			StatusBars targetStatus = targetInfo.transform.GetComponent<StatusBars>();
+			targetStatus.SetTarget(newTarget);
+		}
 	}
 
 	public List<GameObject> GetTrackedObjects() {

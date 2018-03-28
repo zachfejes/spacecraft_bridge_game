@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 81637671915129818}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1163,6 +1163,7 @@ MonoBehaviour:
   weaponsManager: {fileID: 0}
   playerWeapon: 0
   emissionObject: {fileID: 4788213745076554}
+  targetDirection: {x: 0, y: 0, z: 0}
   firingArcAngle: 80
 --- !u!114 &114352550099041312
 MonoBehaviour:
@@ -1239,6 +1240,7 @@ MonoBehaviour:
   weaponsManager: {fileID: 0}
   playerWeapon: 0
   emissionObject: {fileID: 4741216114092542}
+  targetDirection: {x: 0, y: 0, z: 0}
   firingArcAngle: 80
 --- !u!114 &114692052399724442
 MonoBehaviour:
@@ -1263,6 +1265,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2ec4804be6d721499393e9c1481dc03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetInfoPrefab: {fileID: 1233544620769470, guid: 89ee89bdc2737ab4ebb4e34de400c032,
+    type: 2}
   scanners: []
   trackedObjects: []
 --- !u!120 &120189990772642008

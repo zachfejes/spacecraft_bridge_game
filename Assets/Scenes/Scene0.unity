@@ -884,13 +884,7 @@ MonoBehaviour:
     type: 2}
   enemyShipPrefab: {fileID: 1785112918009094, guid: 00fa641eb7296c04dbf5cfff0fef90e7,
     type: 2}
-  asteroidPrefabs:
-  - {fileID: 1064400364756954, guid: 1f763ed4cbb9ddc469a7003bec5c57f9, type: 2}
-  - {fileID: 1723660701866948, guid: 122944ac1ccd81946a7623e16cc2edb8, type: 2}
-  - {fileID: 1265042888610902, guid: 47551b6cdceadb84faf8c28be1f38ca6, type: 2}
-  - {fileID: 1704060408339444, guid: 3d006c050d3bd8c46a0f9b905b05fae1, type: 2}
-  - {fileID: 1253517407143088, guid: df51275052df6e446a892eea25defc71, type: 2}
-  - {fileID: 1722278545528900, guid: 05fbf0e0a88fdfc46b450e0c78bb13bb, type: 2}
+  asteroidPrefabs: []
   playerSpawnPoint: {fileID: 1898111484}
   enemySpawnPoints:
   - {fileID: 771524901}
@@ -902,7 +896,7 @@ MonoBehaviour:
   - {fileID: 48715508}
   - {fileID: 1417947485}
   numberOfEnemies: 1
-  numberOfAsteroids: 10
+  numberOfAsteroids: 0
   playerShip: {fileID: 0}
   enemyShips: []
   asteroids: []
