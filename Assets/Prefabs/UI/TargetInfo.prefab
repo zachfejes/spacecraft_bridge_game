@@ -27,7 +27,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1233544620769470
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,7 +251,10 @@ MonoBehaviour:
   offsetX: 0
   health: {fileID: 224242814581851666}
   healthValue: {fileID: 224741272580936032}
+  shield: {fileID: 224796301180039924}
+  shieldValue: {fileID: 224482515584924292}
   percentHealth: 1
+  percentShield: 1
 --- !u!222 &222030880595544790
 CanvasRenderer:
   m_ObjectHideFlags: 1

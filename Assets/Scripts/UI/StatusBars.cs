@@ -17,7 +17,11 @@ public class StatusBars : MonoBehaviour
     public RectTransform health;
     public RectTransform healthValue;
 
+    public RectTransform shield;
+    public RectTransform shieldValue;
+
     public float percentHealth = 1.0f;
+    public float percentShield = 1.0f;
 
     void Awake()
     {
@@ -40,6 +44,7 @@ public class StatusBars : MonoBehaviour
 
 
             relatedDamageManager = relatedTransform.GetComponent<DamageManager>();
+            relatedShieldManager = relatedTransform.GetComponent<ShieldManager>();
 
             if (relatedDamageManager)
             {
@@ -48,6 +53,15 @@ public class StatusBars : MonoBehaviour
                 float parentHeight = health.sizeDelta.y;
                 float valueWidth = parentWidth * percentHealth;
                 healthValue.sizeDelta = new Vector2(valueWidth, parentHeight);
+            }
+
+            if (relatedShieldManager)
+            {
+                percentShield = relatedShieldManager.shieldStrength[0] / 100;
+                float parentWidth = shield.sizeDelta.x;
+                float parentHeight = shield.sizeDelta.y;
+                float valueWidth = parentWidth * percentShield;
+                shieldValue.sizeDelta = new Vector2(valueWidth, parentHeight);
             }
         }
     }
@@ -62,11 +76,15 @@ public class StatusBars : MonoBehaviour
             {
                 health.transform.GetComponent<Image>().enabled = false;
                 healthValue.transform.GetComponent<Image>().enabled = false;
+                shield.transform.GetComponent<Image>().enabled = false;
+                shieldValue.transform.GetComponent<Image>().enabled = false;
             }
             else
             {
                 health.transform.GetComponent<Image>().enabled = true;
                 healthValue.transform.GetComponent<Image>().enabled = true;
+                shield.transform.GetComponent<Image>().enabled = true;
+                shieldValue.transform.GetComponent<Image>().enabled = true;
 
 
                 Vector3 worldPosition = relatedTransform.position;
@@ -89,12 +107,22 @@ public class StatusBars : MonoBehaviour
             float valueWidth = parentWidth * percentHealth;
             healthValue.sizeDelta = new Vector2(valueWidth, parentHeight);
         }
+
+        if (relatedShieldManager)
+        {
+            percentShield = relatedShieldManager.shieldStrength[0] / 100;
+            float parentWidth = shield.sizeDelta.x;
+            float parentHeight = shield.sizeDelta.y;
+            float valueWidth = parentWidth * percentShield;
+            shieldValue.sizeDelta = new Vector2(valueWidth, parentHeight);
+        }
     }
 
     public void SetTarget(GameObject newTarget)
     {
         relatedTransform = newTarget.transform;
         relatedDamageManager = newTarget.transform.GetComponent<DamageManager>();
+        relatedShieldManager = newTarget.transform.GetComponent<ShieldManager>();
     }
 
 }
