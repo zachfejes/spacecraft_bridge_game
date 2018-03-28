@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 //TODO: Make this a subclass of the standard Status Bar class, but with screen-tracking
 
-public class StatusBars : MonoBehaviour
+public class TrackingStatusBar : MonoBehaviour
 {
 
     private RectTransform rt;

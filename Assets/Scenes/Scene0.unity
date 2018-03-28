@@ -1134,10 +1134,10 @@ RectTransform:
   m_PrefabInternal: {fileID: 621437841}
 --- !u!114 &621437843 stripped
 MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114689982183525164, guid: 4f67befc8cb1aad42a653aa9de4bb12a,
+  m_PrefabParentObject: {fileID: 114317129658713726, guid: 4f67befc8cb1aad42a653aa9de4bb12a,
     type: 2}
   m_PrefabInternal: {fileID: 621437841}
-  m_Script: {fileID: 11500000, guid: 12001db776ffa7943beaa3ec187e6736, type: 3}
+  m_Script: {fileID: 11500000, guid: ec8f98a09bd2a564ba9b92932190edb4, type: 3}
 --- !u!1 &671612283
 GameObject:
   m_ObjectHideFlags: 0

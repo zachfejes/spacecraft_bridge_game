@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //TODO: Make this the standard Status Bar parent class
-public class PlayerStatusBars : MonoBehaviour
+public class StatusBar : MonoBehaviour
 {
     public Transform relatedTransform;
     public DamageManager relatedDamageManager;

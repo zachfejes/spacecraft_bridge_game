@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 224284349650782174}
   - component: {fileID: 222758575863485570}
   - component: {fileID: 114333929561555252}
-  - component: {fileID: 114755765334100876}
+  - component: {fileID: 114697531145780802}
   m_Layer: 5
   m_Name: TargetInfo
   m_TagString: Untagged
@@ -232,7 +232,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114755765334100876
+--- !u!114 &114697531145780802
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -240,7 +240,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1233544620769470}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e01f6e2b51474054b9aba114f35e0ff6, type: 3}
+  m_Script: {fileID: 11500000, guid: e0d1ee22567400b42b8386ea7f342fc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   canvasRT: {fileID: 0}

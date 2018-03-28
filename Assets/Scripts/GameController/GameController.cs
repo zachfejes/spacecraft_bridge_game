@@ -28,7 +28,7 @@ public class GameController : MonoBehaviour
 
     public GameObject pauseGamePanel;
 
-    public PlayerStatusBars playerStatus;
+    public StatusBar playerStatus;
 
     public GameObject scorePanel;
 

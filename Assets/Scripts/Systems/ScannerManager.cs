@@ -18,7 +18,7 @@ public class ScannerManager : MonoBehaviour {
 			if(canvas) {
 				GameObject newTargetInfo = GameObject.Instantiate(targetInfoPrefab);
 				newTargetInfo.transform.SetParent(canvas.transform);
-				newTargetInfo.GetComponent<StatusBars>().canvasRT = canvas.GetComponent<RectTransform>();
+				newTargetInfo.GetComponent<TrackingStatusBar>().canvasRT = canvas.GetComponent<RectTransform>();
 				targetInfo = newTargetInfo.GetComponent<RectTransform>();
 				targetInfo.sizeDelta = new Vector2(0,0);
 				
@@ -65,7 +65,7 @@ public class ScannerManager : MonoBehaviour {
 		target = newTarget;
 
 		if(targetInfo) {
-			StatusBars targetStatus = targetInfo.transform.GetComponent<StatusBars>();
+			TrackingStatusBar targetStatus = targetInfo.transform.GetComponent<TrackingStatusBar>();
 			targetStatus.SetTarget(newTarget);
 		}
 	}
