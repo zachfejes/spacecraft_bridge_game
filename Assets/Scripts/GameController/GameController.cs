@@ -28,6 +28,10 @@ public class GameController : MonoBehaviour
 
     public GameObject pauseGamePanel;
 
+    public PlayerStatusBars playerStatus;
+
+    public GameObject scorePanel;
+
 
 
     void Awake()
@@ -63,6 +67,7 @@ public class GameController : MonoBehaviour
     void InitializePlayer()
     {
         playerShip = GameObject.Instantiate(playerShipPrefab, playerSpawnPoint.position, Quaternion.Euler(Random.Range(-180, 180), Random.Range(-180, 180), Random.Range(-180, 180)));
+        playerStatus.SetTarget(playerShip);
     }
 
     void InitializeEnemies()
