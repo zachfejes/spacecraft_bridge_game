@@ -16,7 +16,7 @@ public class PhaserTracking : Weapon {
 	public Transform emissionObject;
 	ParticleSystem[] endEffects;
 
-	private Vector3 targetDirection;
+	public Vector3 targetDirection;
 	public float firingArcAngle;
 
 	// Use this for initialization
@@ -63,18 +63,20 @@ public class PhaserTracking : Weapon {
 	}
 
 	void OnDrawGizmosSelected() {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawLine(transform.position, transform.position + transform.forward*maxRange);
+            //Gizmos.color = Color.blue;
+            //Gizmos.DrawLine(transform.position, transform.position + transform.forward*maxRange);
 
 			Gizmos.color = Color.green;
-			Gizmos.DrawLine(transform.position, transform.position + Quaternion.AngleAxis(firingArcAngle, transform.up) * transform.forward*maxRange);
-			Gizmos.DrawLine(transform.position, transform.position + Quaternion.AngleAxis(-firingArcAngle, transform.up) * transform.forward*maxRange);
-			Gizmos.DrawLine(transform.position, transform.position + Quaternion.AngleAxis(90, transform.forward)*Quaternion.AngleAxis(firingArcAngle, transform.up) * transform.forward*maxRange);
-			Gizmos.DrawLine(transform.position, transform.position + Quaternion.AngleAxis(90, transform.forward)*Quaternion.AngleAxis(-firingArcAngle, transform.up) * transform.forward*maxRange);
+			Gizmos.DrawLine(transform.position, targetDirection + transform.position);
+
+			// Gizmos.DrawLine(transform.position, transform.position + Quaternion.AngleAxis(firingArcAngle, transform.up) * transform.forward*maxRange);
+			// Gizmos.DrawLine(transform.position, transform.position + Quaternion.AngleAxis(-firingArcAngle, transform.up) * transform.forward*maxRange);
+			// Gizmos.DrawLine(transform.position, transform.position + Quaternion.AngleAxis(90, transform.forward)*Quaternion.AngleAxis(firingArcAngle, transform.up) * transform.forward*maxRange);
+			// Gizmos.DrawLine(transform.position, transform.position + Quaternion.AngleAxis(90, transform.forward)*Quaternion.AngleAxis(-firingArcAngle, transform.up) * transform.forward*maxRange);
     }
 
 	void updateTargetTracking() {
-		if(GetTarget()) {
+		if(GetTarget() != null) {
 			targetDirection = Vector3.Normalize(GetTarget().transform.position - transform.position);
 		}
 	}
@@ -97,9 +99,9 @@ public class PhaserTracking : Weapon {
 			Physics.Raycast(transform.position, targetDirection, out hit, maxRange);
 		}
 
-		lineRenderer.SetPosition(0, transform.position);
-
 		if(hit.collider) {
+			lineRenderer.SetPosition(0, transform.position);
+
 			Shield hitShield = hit.collider.transform.GetComponent<Shield>();
 			DamageManager hitDamageManager = hit.collider.attachedRigidbody.transform.GetComponent<DamageManager>();
 

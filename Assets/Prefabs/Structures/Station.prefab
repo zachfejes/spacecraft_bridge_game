@@ -220,6 +220,7 @@ GameObject:
   - component: {fileID: 4459816978429086}
   - component: {fileID: 54915432989872710}
   - component: {fileID: 114034481903129210}
+  - component: {fileID: 114845623890642206}
   m_Layer: 0
   m_Name: Station
   m_TagString: Untagged
@@ -1737,3 +1738,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxShieldHP: 1000
+--- !u!114 &114845623890642206
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1470054864656106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f4c895ee567f75489b697d39920fc5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 1000
+  health: 1000

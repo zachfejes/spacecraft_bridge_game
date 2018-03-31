@@ -9,18 +9,32 @@ public class GameController : MonoBehaviour
 
     public GameObject playerShipPrefab;
     public GameObject enemyShipPrefab;
+
+    public GameObject[] asteroidPrefabs;
+
     public Transform playerSpawnPoint;
     public Transform[] enemySpawnPoints;
 
     public int numberOfEnemies = 0;
 
+    public int numberOfAsteroids = 0;
+
+    public GameObject canvas;
+
     public GameObject playerShip;
     public List<AiNeutral> enemyShips = new List<AiNeutral>();
 
+    public List<Rigidbody> asteroids = new List<Rigidbody>();
+
+    public bool gameOver = false;
 
     public GameObject gameOverPanel;
 
     public GameObject pauseGamePanel;
+
+    public StatusBar playerStatus;
+
+    public GameObject scorePanel;
 
 
 
@@ -31,25 +45,43 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        if (playerShip == null)
+        if (!gameOver)
         {
-			GameOver("DEFEAT");
-        }
-        else if (enemyShips.Count == 0)
-        {
-			GameOver("VICTORY");
-        }
+            if (playerShip == null)
+            {
+                GameOver("DEFEAT");
+            }
+            else if (enemyShips.Count == 0)
+            {
+                GameOver("VICTORY");
+            }
 
-        if(Input.GetKeyDown(KeyCode.P)) {
-            TogglePaused();
-        }
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                TogglePaused();
+            }
 
+            UpdateScorePanel();
+        }
     }
 
     public void InitializeGame()
     {
-        playerShip = GameObject.Instantiate(playerShipPrefab, playerSpawnPoint.position, Quaternion.Euler(Random.Range(-180, 180), Random.Range(-180, 180), Random.Range(-180, 180)));
+        canvas = GameObject.Find("Canvas");
 
+        InitializePlayer();
+        InitializeEnemies();
+        InitializeEnvironment();
+    }
+
+    void InitializePlayer()
+    {
+        playerShip = GameObject.Instantiate(playerShipPrefab, playerSpawnPoint.position, Quaternion.Euler(Random.Range(-180, 180), Random.Range(-180, 180), Random.Range(-180, 180)));
+        playerStatus.SetTarget(playerShip);
+    }
+
+    void InitializeEnemies()
+    {
         for (int i = 0; i < numberOfEnemies; i++)
         {
             Vector3 spawnPosition = enemySpawnPoints[Random.Range(0, enemySpawnPoints.Length - 1)].position + new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), Random.Range(-10, 10));
@@ -61,48 +93,74 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void GameOver(string bannerText){
-        if (gameOverPanel && !gameOverPanel.activeSelf)
+    void InitializeEnvironment()
+    {
+        for (int i = 0; i < numberOfAsteroids; i++)
         {
-            gameOverPanel.SetActive(true);
-            Transform gameOverHeader = gameOverPanel.transform.Find("CopyPanel");
-            if (gameOverHeader)
-            {
-                gameOverHeader.GetComponentInChildren<Text>().text = bannerText;
+            Vector3 spawnPosition = new Vector3(Random.Range(-100.0f, 100.0f), Random.Range(-100.0f, 100.0f), Random.Range(-100.0f, 100.0f));
+            Quaternion spawnRotation = Quaternion.Euler(Random.Range(-180, 180), Random.Range(-180, 180), Random.Range(-180, 180));
 
-            }
+            GameObject prefab = asteroidPrefabs[Random.Range(0, asteroidPrefabs.Length)];
 
+            asteroids.Add(GameObject.Instantiate(prefab, spawnPosition, spawnRotation).GetComponent<Rigidbody>());
         }
     }
 
-	public void ShipDestroyed(AiNeutral destroyedAI) {
-		enemyShips.Remove(destroyedAI);
-	}
+    public void GameOver(string bannerText)
+    {
+        if (gameOverPanel && !gameOverPanel.activeSelf)
+        {
+            gameOver = true;
 
-	public void NavigateMainMenu() {
-		SceneManager.LoadScene("Menu");
-	}
+            gameOverPanel.SetActive(true);
 
-	public void RestartGame() {
-		Scene scene = SceneManager.GetActiveScene(); 
+            gameOverPanel.GetComponentInChildren<Text>().text = bannerText;
+        }
+    }
+
+    public void ShipDestroyed(AiNeutral destroyedAI)
+    {
+        enemyShips.Remove(destroyedAI);
+    }
+
+    public void NavigateMainMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
+
+    public void RestartGame()
+    {
+        Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
-	}
+    }
 
-    public void TogglePaused() {
+    public void TogglePaused()
+    {
         if (pauseGamePanel)
         {
-            if(pauseGamePanel.activeSelf) {
+            if (pauseGamePanel.activeSelf)
+            {
                 pauseGamePanel.SetActive(false);
                 Time.timeScale = 1;
             }
-            else {
+            else
+            {
                 Time.timeScale = 0;
                 pauseGamePanel.SetActive(true);
             }
         }
-        else {
+        else
+        {
             Debug.Log("pauseGamePanel does not exist");
         }
+    }
+
+    void UpdateScorePanel()
+    {
+        int enemiesLeft = numberOfEnemies - enemyShips.Count;
+        string readout = "Destroyed: " + enemiesLeft.ToString() + "/" + numberOfEnemies.ToString();
+
+        scorePanel.transform.GetComponentInChildren<Text>().text = readout;
     }
 
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour {
 
 	public float inputFire = 0;
-	public GameObject target;
+	public GameObject target = null;
 	public WeaponsManager weaponsManager;
 	public bool playerWeapon = false;
 

@@ -39,5 +39,24 @@ public class PlayerController : MonoBehaviour {
 		if(scannerManager) {
 			scannerManager.SetInputScan(Input.GetAxis("Scan"));
 		}
+
+		if(Input.GetKeyDown(KeyCode.T)) {
+			if(scannerManager != null && scannerManager.GetTrackedObjects() != null && scannerManager.GetTrackedObjects().Count > 0) {
+				GameObject nearestObject = null;
+
+				for(int i = 0; i < scannerManager.GetTrackedObjects().Count; i++) {
+					if(nearestObject == null) {
+						nearestObject = scannerManager.GetTrackedObjects()[i];
+					}
+					else if (Vector3.Distance(scannerManager.GetTrackedObjects()[i].transform.position, transform.position) < Vector3.Distance(nearestObject.transform.position, transform.position)) {
+						nearestObject = scannerManager.GetTrackedObjects()[i];
+					}
+				}
+				
+				weaponsManager.SetTarget(nearestObject);
+				scannerManager.SetTarget(nearestObject);
+			}
+		}
+
 	}
 }
