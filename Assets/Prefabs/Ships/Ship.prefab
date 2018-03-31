@@ -11,6 +11,24 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1785112918009094}
   m_IsPrefabParent: 1
+--- !u!1 &1039795928239484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4194380690391982}
+  - component: {fileID: 33338681562784688}
+  - component: {fileID: 135821471565819662}
+  - component: {fileID: 23095082881607004}
+  m_Layer: 9
+  m_Name: MinimapMarker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1113608316056270
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,6 +334,7 @@ Transform:
   - {fileID: 4056446645465050}
   - {fileID: 4545073073194288}
   - {fileID: 4922303357533050}
+  - {fileID: 4194380690391982}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -331,6 +350,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4105846206204662}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4194380690391982
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1039795928239484}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_Children: []
+  m_Father: {fileID: 4105846206204662}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4221772500667142
 Transform:
@@ -491,6 +523,40 @@ Transform:
   m_Father: {fileID: 4105846206204662}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &23095082881607004
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1039795928239484}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 8584030a7700cf54096d9e7aef4517e3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!23 &23172765627362682
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -859,6 +925,13 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1164523480007350}
   m_Mesh: {fileID: 4300004, guid: 218b76ba9a011594eababdd1c99d3e16, type: 3}
+--- !u!33 &33338681562784688
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1039795928239484}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &33345906358903418
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -1084,6 +1157,7 @@ MonoBehaviour:
   weaponsManager: {fileID: 0}
   playerWeapon: 0
   emissionObject: {fileID: 4918649565341304}
+  targetDirection: {x: 0, y: 0, z: 0}
   firingArcAngle: 45
 --- !u!114 &114555449305727690
 MonoBehaviour:
@@ -1145,6 +1219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2ec4804be6d721499393e9c1481dc03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetInfoPrefab: {fileID: 0}
   scanners: []
   trackedObjects: []
 --- !u!114 &114952044268162136
@@ -1292,6 +1367,18 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!135 &135821471565819662
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1039795928239484}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198247685907117706
 ParticleSystem:
   m_ObjectHideFlags: 1

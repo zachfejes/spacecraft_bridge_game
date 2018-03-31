@@ -11,12 +11,15 @@ public class GameController : MonoBehaviour
     public GameObject enemyShipPrefab;
 
     public GameObject[] asteroidPrefabs;
+
     public Transform playerSpawnPoint;
     public Transform[] enemySpawnPoints;
 
     public int numberOfEnemies = 0;
 
     public int numberOfAsteroids = 0;
+
+    public GameObject canvas;
 
     public GameObject playerShip;
     public List<AiNeutral> enemyShips = new List<AiNeutral>();
@@ -64,6 +67,8 @@ public class GameController : MonoBehaviour
 
     public void InitializeGame()
     {
+        canvas = GameObject.Find("Canvas");
+
         InitializePlayer();
         InitializeEnemies();
         InitializeEnvironment();

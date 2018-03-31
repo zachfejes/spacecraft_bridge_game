@@ -21,7 +21,6 @@ public class ScannerManager : MonoBehaviour {
 				newTargetInfo.GetComponent<TrackingStatusBar>().canvasRT = canvas.GetComponent<RectTransform>();
 				targetInfo = newTargetInfo.GetComponent<RectTransform>();
 				targetInfo.sizeDelta = new Vector2(0,0);
-				
 			}
 		}
 
