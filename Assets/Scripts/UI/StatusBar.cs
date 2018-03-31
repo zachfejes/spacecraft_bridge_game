@@ -16,8 +16,8 @@ public class StatusBar : MonoBehaviour
     public RectTransform shield;
     public RectTransform shieldValue;
 
-    public float percentHealth = 1.0f;
-    public float percentShield = 1.0f;
+    public float percentHealth;
+    public float percentShield;
 
     void Awake()
     {
@@ -30,7 +30,7 @@ public class StatusBar : MonoBehaviour
         UpdateShieldBar();
     }
 
-    private void Initialize()
+    public void Initialize()
     {
         if (relatedTransform)
         {
@@ -42,10 +42,11 @@ public class StatusBar : MonoBehaviour
         }
     }
 
-    private void UpdateDamageBar()
+    public void UpdateDamageBar()
     {
         if (relatedDamageManager)
-        {
+        {   
+            Debug.Log("relatedDamageManager.health: " + relatedDamageManager.health + ", relatedDamageManager.maxHealth: " + relatedDamageManager.maxHealth);
             percentHealth = relatedDamageManager.health / relatedDamageManager.maxHealth;
             float parentWidth = health.sizeDelta.x;
             float parentHeight = health.sizeDelta.y;
@@ -54,7 +55,7 @@ public class StatusBar : MonoBehaviour
         }
     }
 
-    private void UpdateShieldBar()
+    public void UpdateShieldBar()
     {
         if (relatedShieldManager && relatedShieldManager.shieldStrength.Length > 0)
         {
