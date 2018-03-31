@@ -46,7 +46,6 @@ public class StatusBar : MonoBehaviour
     {
         if (relatedDamageManager)
         {   
-            Debug.Log("relatedDamageManager.health: " + relatedDamageManager.health + ", relatedDamageManager.maxHealth: " + relatedDamageManager.maxHealth);
             percentHealth = relatedDamageManager.health / relatedDamageManager.maxHealth;
             float parentWidth = health.sizeDelta.x;
             float parentHeight = health.sizeDelta.y;

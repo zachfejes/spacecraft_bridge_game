@@ -55,6 +55,7 @@ public class GameController : MonoBehaviour
             TogglePaused();
         }
 
+        UpdateScorePanel();
     }
 
     public void InitializeGame()
@@ -146,6 +147,14 @@ public class GameController : MonoBehaviour
         {
             Debug.Log("pauseGamePanel does not exist");
         }
+    }
+
+    void UpdateScorePanel()
+    {
+        int enemiesLeft = numberOfEnemies - enemyShips.Count;
+        string readout = "Destroyed: " + enemiesLeft.ToString() + "/" + numberOfEnemies.ToString();
+
+        scorePanel.transform.GetComponentInChildren<Text>().text = readout;
     }
 
 }
