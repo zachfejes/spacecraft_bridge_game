@@ -52,6 +52,9 @@ public class TrackingStatusBar : StatusBar
                 rt.anchoredPosition = CalculateScreenPosition();
             }
         }
+        else {
+            ToggleStatusBars(false);
+        }
     }
 
     Vector2 CalculateScreenPosition()

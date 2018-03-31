@@ -23,6 +23,7 @@ public class GameController : MonoBehaviour
 
     public List<Rigidbody> asteroids = new List<Rigidbody>();
 
+    public bool gameOver = false;
 
     public GameObject gameOverPanel;
 
@@ -41,21 +42,24 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        if (playerShip == null)
+        if (!gameOver)
         {
-            GameOver("DEFEAT");
-        }
-        else if (enemyShips.Count == 0)
-        {
-            GameOver("VICTORY");
-        }
+            if (playerShip == null)
+            {
+                GameOver("DEFEAT");
+            }
+            else if (enemyShips.Count == 0)
+            {
+                GameOver("VICTORY");
+            }
 
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            TogglePaused();
-        }
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                TogglePaused();
+            }
 
-        UpdateScorePanel();
+            UpdateScorePanel();
+        }
     }
 
     public void InitializeGame()
@@ -101,14 +105,11 @@ public class GameController : MonoBehaviour
     {
         if (gameOverPanel && !gameOverPanel.activeSelf)
         {
+            gameOver = true;
+
             gameOverPanel.SetActive(true);
-            Transform gameOverHeader = gameOverPanel.transform.Find("CopyPanel");
-            if (gameOverHeader)
-            {
-                gameOverHeader.GetComponentInChildren<Text>().text = bannerText;
 
-            }
-
+            gameOverPanel.GetComponentInChildren<Text>().text = bannerText;
         }
     }
 
