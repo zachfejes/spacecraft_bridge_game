@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4194380690391982}
   - component: {fileID: 33338681562784688}
-  - component: {fileID: 135821471565819662}
   - component: {fileID: 23095082881607004}
   m_Layer: 9
   m_Name: MinimapMarker
@@ -1367,18 +1366,6 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!135 &135821471565819662
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1039795928239484}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198247685907117706
 ParticleSystem:
   m_ObjectHideFlags: 1

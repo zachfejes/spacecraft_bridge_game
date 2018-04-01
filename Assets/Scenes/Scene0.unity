@@ -1011,7 +1011,7 @@ MonoBehaviour:
   - {fileID: 1053704225}
   - {fileID: 48715508}
   - {fileID: 1417947485}
-  numberOfEnemies: 2
+  numberOfEnemies: 1
   numberOfAsteroids: 5
   canvas: {fileID: 837647167}
   playerShip: {fileID: 0}
