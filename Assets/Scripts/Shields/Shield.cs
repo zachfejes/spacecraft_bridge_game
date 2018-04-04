@@ -25,7 +25,7 @@ public class Shield : MonoBehaviour {
         return(shieldHP);
     }
 
-    public void DamageShield(float damage) {
+    public float DamageShield(float damage) {
         if(shieldHP - damage <= 0) {
             shieldHP = 0;
             DeactivateShield();
@@ -33,6 +33,8 @@ public class Shield : MonoBehaviour {
         else {
             shieldHP -= damage;
         }
+
+        return(shieldHP);
     }
 
     public void HealShield(float healing) {
