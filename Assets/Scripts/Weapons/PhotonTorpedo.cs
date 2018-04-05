@@ -77,6 +77,8 @@ public class PhotonTorpedo : MonoBehaviour
             explosion.SetActive(true);
         }
 
+        transform.GetComponent<MeshRenderer>().enabled = false;
+
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, blastRadius);
 
         List<GameObject> scannedObjects = new List<GameObject>();

@@ -441,8 +441,10 @@ public class AiNeutral : MonoBehaviour
         Vector3 avoidanceVector = Vector3.zero;
         for (int i = 0; i < thingsToAvoid.Count; i++)
         {
-            avoidanceMagnitude = Mathf.Pow(50 / Vector3.Distance(transform.position, thingsToAvoid[i].transform.position), 2);
-            avoidanceVector += avoidanceMagnitude * Vector3.Normalize(transform.position - thingsToAvoid[i].transform.position);
+            if(thingsToAvoid[i] != null) {
+                avoidanceMagnitude = Mathf.Pow(50 / Vector3.Distance(transform.position, thingsToAvoid[i].transform.position), 2);
+                avoidanceVector += avoidanceMagnitude * Vector3.Normalize(transform.position - thingsToAvoid[i].transform.position);
+            }
         }
         return (avoidanceVector);
     }
