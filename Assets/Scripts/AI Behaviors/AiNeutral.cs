@@ -33,6 +33,8 @@ public class AiNeutral : MonoBehaviour
     public float orbitSpeedLimit = 10.0f;
     public float avoidanceRange = 20.0f;
 
+    public float safeDistance = 100.0f;
+
     private float angle_x;
     private float angle_y;
 
@@ -107,23 +109,25 @@ public class AiNeutral : MonoBehaviour
         }
     }
 
-	void OnDestroy() {
-		GameObject gameControllerObject = GameObject.FindWithTag ("GameController");
-		GameController gameController = null;
+    void OnDestroy()
+    {
+        GameObject gameControllerObject = GameObject.FindWithTag("GameController");
+        GameController gameController = null;
 
         if (gameControllerObject != null)
         {
-            gameController = gameControllerObject.GetComponent <GameController>();
+            gameController = gameControllerObject.GetComponent<GameController>();
         }
 
         if (gameController == null)
         {
-            Debug.Log ("Cannot find 'GameController' script");
+            Debug.Log("Cannot find 'GameController' script");
         }
-		else {
-			gameController.ShipDestroyed(this);
-		}
-	}
+        else
+        {
+            gameController.ShipDestroyed(this);
+        }
+    }
 
 
     // Use this for initialization
@@ -162,6 +166,7 @@ public class AiNeutral : MonoBehaviour
                 AttackTargetBehavior();
                 break;
             case ActionType.RUN_FROM_TARGET:
+                RunFromTargetBehavior(false);
                 break;
             case ActionType.CUT_ALL_ENGINES:
                 CutAllEngines();
@@ -199,27 +204,30 @@ public class AiNeutral : MonoBehaviour
 
     void AttackTargetBehavior()
     {
-		if(target == null && weaponsManager) {
-			weaponsManager.SetTarget(null);
-			weaponsManager.SetInputFire(0);
+        if (target == null && weaponsManager)
+        {
+            weaponsManager.SetTarget(null);
+            weaponsManager.SetInputFire(0);
 
-			SetAction(ActionType.CUT_ALL_ENGINES);
-		}
-		else {
-			if(weaponsManager) {
-				weaponsManager.SetTarget(target);
-				weaponsManager.SetInputFire(1);
-			}
+            SetAction(ActionType.CUT_ALL_ENGINES);
+        }
+        else
+        {
+            if (weaponsManager)
+            {
+                weaponsManager.SetTarget(target);
+                weaponsManager.SetInputFire(1);
+            }
 
-			if (Random.Range(0.0f, 1.0f) > 0.5f)
-			{
-				TravelTowardPointBehavior(false);
-			}
-			else
-			{
-				OrbitPointAtDistanceBehavior(20.0f);
-			}
-		}
+            if (Random.Range(0.0f, 1.0f) > 0.5f)
+            {
+                TravelTowardPointBehavior(false);
+            }
+            else
+            {
+                OrbitPointAtDistanceBehavior(20.0f);
+            }
+        }
     }
 
     void TravelTowardPointBehavior(bool stopOnArrival)
@@ -268,6 +276,114 @@ public class AiNeutral : MonoBehaviour
 
         //Turn if we're not yet aligned with the travel vector (within accceptancce margin)
         if (angle_x > 5 || angle_x < -5 || angle_y > 5 || angle_y < -5)
+        {//our angle isn't within 5 deg of the target vector yet) {
+
+            if (rb.angularVelocity.magnitude > maxRadV_path)
+            {
+                flightControl.SetYaw(0);
+                flightControl.SetPitch(0);
+            }
+            else
+            {
+                if (angle_x < 5.0f)
+                {
+                    flightControl.SetYaw(-1);
+                }
+                else if (angle_x > 5.0f)
+                {
+                    flightControl.SetYaw(1);
+                }
+                else
+                {
+                    flightControl.SetYaw(0);
+                }
+
+                if (angle_y < -5.0f)
+                {
+                    flightControl.SetPitch(-1);
+                }
+                else if (angle_y > 5.0f)
+                {
+                    flightControl.SetPitch(1);
+                }
+                else
+                {
+                    flightControl.SetPitch(0);
+                }
+            }
+
+        }
+        else
+        {
+            flightControl.SetPitch(0);
+            flightControl.SetYaw(0);
+        }
+
+        /* MOVE ALONG TRAVEL VECTOR (START) */
+
+        if (Vector3.Distance(transform.position, target.transform.position) > minimumProximity && rb.angularVelocity.magnitude < 0.01)
+        {
+            if (flightControl.inputVertical <= 0)
+            {
+                MoveForward();
+            }
+        }
+        else
+        {
+            if (flightControl.inputVertical != 0)
+            {
+                StopForwardMotion();
+            }
+        }
+    }
+
+    void RunFromTargetBehavior(bool stopWhenSafe)
+    {
+
+        //If we're far enough away from the target, power down engines
+        if (Vector3.Distance(transform.position, target.transform.position) > safeDistance)
+        {
+            travelVector = Vector3.zero;
+            angle_x = 0;
+            angle_y = 0;
+            if (stopWhenSafe)
+            {
+                currentAction = ActionType.CUT_ALL_ENGINES;
+            }
+            else
+            {
+                StopForwardMotion();
+                flightControl.SetYaw(0);
+                flightControl.SetPitch(0);
+            }
+            return;
+        }
+
+        //If we're still too close to the target, try to get away from it
+
+        /* UPDATE THE TRAVEL VECTOR (START) */
+
+        Vector3 awayFromTarget = transform.position - target.transform.position;
+        Vector3 avoidObsticals = CalculateAvoidanceVector();
+        travelVector = awayFromTarget + avoidObsticals;
+
+        /* TURN TOWARD TRAVEL VECTOR (START) */
+        Vector3 travelVector_localHorizontal = Vector3.ProjectOnPlane(travelVector, transform.up);
+        Vector3 travelVector_localAzumith = Vector3.ProjectOnPlane(travelVector, transform.right);
+
+        angle_x = Vector3.SignedAngle(transform.forward, travelVector_localHorizontal, transform.up);
+        angle_y = Vector3.SignedAngle(transform.forward, travelVector_localAzumith, transform.right);
+        if (angle_y > 90)
+        {
+            angle_y = 180 - angle_y;
+        }
+        else if (angle_y < -90)
+        {
+            angle_y = -180 - angle_y;
+        }
+
+        //Turn if we're not yet aligned with the travel vector (within accceptancce margin)
+        if (angle_x > 20 || angle_x < -20 || angle_y > 20 || angle_y < -20)
         {//our angle isn't within 5 deg of the target vector yet) {
 
             if (rb.angularVelocity.magnitude > maxRadV_path)
@@ -422,16 +538,19 @@ public class AiNeutral : MonoBehaviour
         }
     }
 
-    void SlowRotateBehavior() {
+    void SlowRotateBehavior()
+    {
         if (flightControl.inputVertical != 0)
         {
             StopForwardMotion();
         }
 
-        if(rb.angularVelocity.magnitude > 0.1f) {
+        if (rb.angularVelocity.magnitude > 0.1f)
+        {
             flightControl.SetYaw(0);
         }
-        else {
+        else
+        {
             flightControl.SetYaw(1);
         }
     }
@@ -441,7 +560,8 @@ public class AiNeutral : MonoBehaviour
         Vector3 avoidanceVector = Vector3.zero;
         for (int i = 0; i < thingsToAvoid.Count; i++)
         {
-            if(thingsToAvoid[i] != null) {
+            if (thingsToAvoid[i] != null)
+            {
                 avoidanceMagnitude = Mathf.Pow(50 / Vector3.Distance(transform.position, thingsToAvoid[i].transform.position), 2);
                 avoidanceVector += avoidanceMagnitude * Vector3.Normalize(transform.position - thingsToAvoid[i].transform.position);
             }

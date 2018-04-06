@@ -1203,10 +1203,11 @@ MonoBehaviour:
   maxRadV_path: 0.3
   maxRadV_orbit: 1
   minimumProximity: 20
-  currentAction: 7
+  currentAction: 6
   targetOrbitDistance: 20
   orbitSpeedLimit: 10
   avoidanceRange: 20
+  safeDistance: 100
 --- !u!114 &114748379260381436
 MonoBehaviour:
   m_ObjectHideFlags: 1
