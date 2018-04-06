@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
         {
             if (scannerManager != null && scannerManager.GetTrackedObjects() != null && scannerManager.GetTrackedObjects().Count > 0)
             {
-                GameObject nearestObject = null;
+                GameObject nearestObject = scannerManager.GetTrackedObjects()[0];
 
                 for (int i = 0; i < scannerManager.GetTrackedObjects().Count; i++)
                 {

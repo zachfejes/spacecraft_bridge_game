@@ -2,14 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PhotonTorpedo : MonoBehaviour
+public class PhotonTorpedo : Torpedo
 {
-
-    private float fuseTime = 3.0f;
-    private float fuseStartTime;
     private float explosionLifetime = 5.0f;
     private float explosionStartTime;
-    private bool detonated = false;
     private float yield = 120.0f;
     private float blastRadius = 10.0f;
 
@@ -21,18 +17,13 @@ public class PhotonTorpedo : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         explosion = transform.Find("Explosion").gameObject;
-    }
-
-    // Use this for initialization
-    void Start()
-    {
-        fuseStartTime = Time.time;
+        FuseStartTime(Time.time);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (detonated)
+        if (EffectActive())
         {
             if (Time.time - explosionStartTime >= explosionLifetime)
             {
@@ -41,24 +32,24 @@ public class PhotonTorpedo : MonoBehaviour
         }
         else
         {
-            if (Time.time - fuseStartTime >= fuseTime)
+            if (Time.time - FuseStartTime() >= FuseTime())
             {
-                Detonate();
+                Activate();
             }
         }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (!detonated)
+        if (!EffectActive())
         {
-            Detonate();
+            Activate();
         }
     }
 
-    private void Yield(float newYield)
+    private void Yield(float value)
     {
-        yield = newYield;
+        yield = value;
     }
 
     private float Yield()
@@ -66,9 +57,9 @@ public class PhotonTorpedo : MonoBehaviour
         return (yield);
     }
 
-    public void Detonate()
+    new public void Activate()
     {
-        detonated = true;
+        EffectActive(true);
         explosionStartTime = Time.time;
         rb.velocity = new Vector3(0, 0, 0);
 
@@ -97,7 +88,7 @@ public class PhotonTorpedo : MonoBehaviour
         for (int i = 0; i < scannedObjects.Count; i++)
         {
             GameObject tempObject = scannedObjects[i];
-            tempObject.GetComponent<Rigidbody>().AddExplosionForce(500.0f, transform.position, blastRadius);
+            tempObject.GetComponent<Rigidbody>().AddExplosionForce(100000.0f, transform.position, blastRadius);
 
             Shield hitShield = tempObject.transform.GetComponentInChildren<Shield>();
             DamageManager hitDamageManager = tempObject.transform.GetComponent<DamageManager>();

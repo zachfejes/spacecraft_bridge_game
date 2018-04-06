@@ -99,6 +99,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1224569109908744
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4221022349558452}
+  - component: {fileID: 114370242244657474}
+  m_Layer: 0
+  m_Name: Launch Tube (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1226418215304388
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +330,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1917520809582140
 GameObject:
   m_ObjectHideFlags: 1
@@ -447,6 +463,7 @@ Transform:
   - {fileID: 4097174933639786}
   - {fileID: 4074990846719848}
   - {fileID: 4986728545135962}
+  - {fileID: 4221022349558452}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -490,6 +507,19 @@ Transform:
   m_Father: {fileID: 4048792473389524}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 35, z: 0}
+--- !u!4 &4221022349558452
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1224569109908744}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.42, z: 0.93}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4048792473389524}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4225119745066222
 Transform:
   m_ObjectHideFlags: 1
@@ -1356,6 +1386,22 @@ MonoBehaviour:
   flightControl: {fileID: 114560531461700010}
   weaponsManager: {fileID: 114148273120135392}
   scannerManager: {fileID: 114839406938328302}
+--- !u!114 &114370242244657474
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1224569109908744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a7398edd2876d342991763f001eac46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputFire: 0
+  target: {fileID: 0}
+  weaponsManager: {fileID: 0}
+  playerWeapon: 0
+  payload: {fileID: 54779488137794340, guid: f583e18715d07c54c87eccc1294568b8, type: 2}
 --- !u!114 &114458377253808116
 MonoBehaviour:
   m_ObjectHideFlags: 1

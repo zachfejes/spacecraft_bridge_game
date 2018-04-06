@@ -45,12 +45,16 @@ public class StatusBar : MonoBehaviour
     public void UpdateDamageBar()
     {
         if (relatedDamageManager)
-        {   
+        {
+            health.gameObject.SetActive(true);
             percentHealth = relatedDamageManager.health / relatedDamageManager.maxHealth;
             float parentWidth = health.sizeDelta.x;
             float parentHeight = health.sizeDelta.y;
             float valueWidth = parentWidth * percentHealth;
             healthValue.sizeDelta = new Vector2(valueWidth, parentHeight);
+        }
+        else {
+            health.gameObject.SetActive(false);
         }
     }
 
@@ -58,19 +62,26 @@ public class StatusBar : MonoBehaviour
     {
         if (relatedShieldManager && relatedShieldManager.shieldStrength.Length > 0)
         {
+            shield.gameObject.SetActive(true);
             percentShield = relatedShieldManager.shieldStrength[0] / 100;
             float parentWidth = shield.sizeDelta.x;
             float parentHeight = shield.sizeDelta.y;
             float valueWidth = parentWidth * percentShield;
             shieldValue.sizeDelta = new Vector2(valueWidth, parentHeight);
         }
+        else {
+            shield.gameObject.SetActive(false);
+        }
     }
 
     public void SetTarget(GameObject newTarget)
     {
-        relatedTransform = newTarget.transform;
-        relatedDamageManager = newTarget.transform.GetComponent<DamageManager>();
-        relatedShieldManager = newTarget.transform.GetComponent<ShieldManager>();
+        if (newTarget)
+        {
+            relatedTransform = newTarget.transform;
+            relatedDamageManager = newTarget.transform.GetComponent<DamageManager>();
+            relatedShieldManager = newTarget.transform.GetComponent<ShieldManager>();
+        }
     }
 
 }
