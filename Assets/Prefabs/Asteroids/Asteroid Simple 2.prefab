@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4564956278656890}
   - component: {fileID: 33765423245454280}
-  - component: {fileID: 135041472770705334}
   - component: {fileID: 23841234510515554}
   m_Layer: 9
   m_Name: MinimapMarker
@@ -200,15 +199,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   health: 100
---- !u!135 &135041472770705334
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1631084420694270}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}

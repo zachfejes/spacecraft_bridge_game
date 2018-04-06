@@ -19,9 +19,7 @@ public class AiNeutral : MonoBehaviour
 
     private SpaceFlightController flightControl;
     public WeaponsManager weaponsManager;
-    // public DamageManager damageManager;
     public ScannerManager scannerManager;
-    // public Vector3 pointOfInterest;
     private Vector3 travelVector = Vector3.zero;
     private Rigidbody rb;
     public GameObject target;
@@ -139,13 +137,6 @@ public class AiNeutral : MonoBehaviour
         rb = transform.GetComponent<Rigidbody>();
     }
 
-    // void Update() {
-    // 	if(damageManager.health < damageManager.maxHealth && weaponsManager.target == null) {
-    // 		weaponsManager.SetTarget(target);
-    // 		weaponsManager.SetInputFire(1);
-    // 	}
-    // }
-
     void Update()
     {
         thingsToAvoid = scannerManager.GetTrackedObjects();
@@ -165,11 +156,10 @@ public class AiNeutral : MonoBehaviour
                 OrbitPointAtDistanceBehavior(20.0f);
                 break;
             case ActionType.SLOW_ROTATE:
+                SlowRotateBehavior();
                 break;
             case ActionType.ATTACK_TARGET:
                 AttackTargetBehavior();
-                break;
-            case ActionType.DEFEND_SELF:
                 break;
             case ActionType.RUN_FROM_TARGET:
                 break;
@@ -432,32 +422,32 @@ public class AiNeutral : MonoBehaviour
         }
     }
 
+    void SlowRotateBehavior() {
+        if (flightControl.inputVertical != 0)
+        {
+            StopForwardMotion();
+        }
+
+        if(rb.angularVelocity.magnitude > 0.1f) {
+            flightControl.SetYaw(0);
+        }
+        else {
+            flightControl.SetYaw(1);
+        }
+    }
+
     Vector3 CalculateAvoidanceVector()
     {
         Vector3 avoidanceVector = Vector3.zero;
         for (int i = 0; i < thingsToAvoid.Count; i++)
         {
-            avoidanceMagnitude = Mathf.Pow(50 / Vector3.Distance(transform.position, thingsToAvoid[i].transform.position), 2);
-            avoidanceVector += avoidanceMagnitude * Vector3.Normalize(transform.position - thingsToAvoid[i].transform.position);
+            if(thingsToAvoid[i] != null) {
+                avoidanceMagnitude = Mathf.Pow(50 / Vector3.Distance(transform.position, thingsToAvoid[i].transform.position), 2);
+                avoidanceVector += avoidanceMagnitude * Vector3.Normalize(transform.position - thingsToAvoid[i].transform.position);
+            }
         }
         return (avoidanceVector);
     }
-
-    // void TranslationalCollisionAvoidance() {
-    // 	Vector3 avoidObsticals = CalculateAvoidanceVector();
-
-    // 	if(Vector3.Distance(transform.position, thingToAvoid.transform.position) < 30.0f) {
-    // 		flightControl.SetHorizontal(avoidObsticals.x);
-    // 		flightControl.SetForeback(avoidObsticals.y);
-    // 	}
-    // 	else {
-    // 		if(flightControl.inputHorizontal != 0 || flightControl.inputForeback != 0) {
-    // 			flightControl.SetHorizontal(0);
-    // 			flightControl.SetForeback(0);
-    // 		}
-    // 	}
-
-    // }
 
     void MoveForward()
     {
