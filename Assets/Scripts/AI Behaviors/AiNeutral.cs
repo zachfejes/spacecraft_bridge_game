@@ -7,6 +7,7 @@ public enum ActionType
     PATH_TO_TARGET,
     FOLLOW_TARGET,
     ORBIT_TARGET,
+    CIRCLE_ORBIT_TARGET,
     SLOW_ROTATE,
     ATTACK_TARGET,
     DEFEND_SELF,
@@ -31,6 +32,10 @@ public class AiNeutral : MonoBehaviour
     public ActionType currentAction = ActionType.CUT_ALL_ENGINES;
     public float targetOrbitDistance = 20.0f;
     public float orbitSpeedLimit = 10.0f;
+
+    public int orbitStep = 0;
+
+    public List<Vector3> orbitStepPositions;
     public float avoidanceRange = 20.0f;
 
     public float safeDistance = 100.0f;
@@ -78,7 +83,7 @@ public class AiNeutral : MonoBehaviour
             Gizmos.color = Color.green;
             Gizmos.DrawLine(transform.position, transform.position + travelVector);
         }
-        else if (currentAction == ActionType.ORBIT_TARGET)
+        else if (currentAction == ActionType.ATTACK_TARGET)
         {
             //Step 1: Find vector from position to target, and then from position to a point a distance from the target on the same line
             //this will guide the ship toward the orbital path (distance)
@@ -106,6 +111,51 @@ public class AiNeutral : MonoBehaviour
 
             Gizmos.color = Color.red;
             Gizmos.DrawLine(transform.position, transform.position + towardTargetPoint + perpendicularToTarget + CalculateAvoidanceVector());
+        }
+        else if (currentAction == ActionType.ORBIT_TARGET) {
+            UnityEditor.Handles.color = Color.green;
+            UnityEditor.Handles.DrawWireDisc(target.transform.position, Vector3.up, targetOrbitDistance);
+        }
+        else if (currentAction == ActionType.CIRCLE_ORBIT_TARGET) {
+            UnityEditor.Handles.color = Color.yellow;
+            UnityEditor.Handles.DrawWireDisc(target.transform.position, Vector3.up, targetOrbitDistance);
+
+            if(orbitStep == 2) {
+                UnityEditor.Handles.color = Color.green;
+                UnityEditor.Handles.DrawWireDisc(target.transform.position - new Vector3(targetOrbitDistance, 0, 0), Vector3.up, 2);
+            }
+            else {
+                UnityEditor.Handles.color = Color.yellow;
+                UnityEditor.Handles.DrawWireDisc(target.transform.position - new Vector3(targetOrbitDistance, 0, 0), Vector3.up, 2);
+            }
+
+            if(orbitStep == 3) {
+                UnityEditor.Handles.color = Color.green;
+                UnityEditor.Handles.DrawWireDisc(target.transform.position - new Vector3(0, 0, targetOrbitDistance), Vector3.up, 2);
+            }
+            else {
+                UnityEditor.Handles.color = Color.yellow;
+                UnityEditor.Handles.DrawWireDisc(target.transform.position - new Vector3(0, 0, targetOrbitDistance), Vector3.up, 2);
+            }
+
+            if(orbitStep == 0) {
+                UnityEditor.Handles.color = Color.green;
+                UnityEditor.Handles.DrawWireDisc(target.transform.position - new Vector3(-targetOrbitDistance, 0, 0), Vector3.up, 2);
+            }
+            else {
+                UnityEditor.Handles.color = Color.yellow;
+                UnityEditor.Handles.DrawWireDisc(target.transform.position - new Vector3(-targetOrbitDistance, 0, 0), Vector3.up, 2);
+            }
+
+            if(orbitStep == 1) {
+                UnityEditor.Handles.color = Color.green;
+                UnityEditor.Handles.DrawWireDisc(target.transform.position - new Vector3(0, 0, -targetOrbitDistance), Vector3.up, 2);
+            }
+            else {
+                UnityEditor.Handles.color = Color.yellow;
+                UnityEditor.Handles.DrawWireDisc(target.transform.position - new Vector3(0, 0, -targetOrbitDistance), Vector3.up, 2);
+            }
+            
         }
     }
 
@@ -159,6 +209,9 @@ public class AiNeutral : MonoBehaviour
             case ActionType.ORBIT_TARGET:
                 OrbitPointAtDistanceBehavior(20.0f);
                 break;
+            case ActionType.CIRCLE_ORBIT_TARGET:
+                CircularOrbitTargetBehavior();
+                break;
             case ActionType.SLOW_ROTATE:
                 SlowRotateBehavior();
                 break;
@@ -187,6 +240,67 @@ public class AiNeutral : MonoBehaviour
     public void SetAction(ActionType newAction)
     {
         currentAction = newAction;
+    }
+
+    void RotateTowardVector(Vector3 alignmentVector) {
+        Vector3 alignmentVector_localHorizontal = Vector3.ProjectOnPlane(alignmentVector, transform.up);
+        Vector3 alignmentVector_localAzumith = Vector3.ProjectOnPlane(alignmentVector, transform.right);
+
+        float angle_x = Vector3.SignedAngle(transform.forward, alignmentVector_localHorizontal, transform.up);
+        float angle_y = Vector3.SignedAngle(transform.forward, alignmentVector_localAzumith, transform.right);
+
+        if (angle_y > 90)
+        {
+            angle_y = 180 - angle_y;
+        }
+        else if (angle_y < -90)
+        {
+            angle_y = -180 - angle_y;
+        }
+
+        if (angle_x > 5 || angle_x < -5 || angle_y > 5 || angle_y < -5)
+        {//our angle isn't within 5 deg of the target vector yet) {
+
+            if (rb.angularVelocity.magnitude > maxRadV_orbit)
+            {
+                flightControl.SetYaw(0);
+                flightControl.SetPitch(0);
+            }
+            else
+            {
+                if (angle_x < 5.0f)
+                {
+                    flightControl.SetYaw(-1);
+                }
+                else if (angle_x > 5.0f)
+                {
+                    flightControl.SetYaw(1);
+                }
+                else
+                {
+                    flightControl.SetYaw(0);
+                }
+
+                if (angle_y < -5.0f)
+                {
+                    flightControl.SetPitch(-1);
+                }
+                else if (angle_y > 5.0f)
+                {
+                    flightControl.SetPitch(1);
+                }
+                else
+                {
+                    flightControl.SetPitch(0);
+                }
+            }
+
+        }
+        else
+        {
+            flightControl.SetPitch(0);
+            flightControl.SetYaw(0);
+        }
     }
 
     void CutAllEngines()
@@ -259,65 +373,7 @@ public class AiNeutral : MonoBehaviour
         Vector3 avoidObsticals = CalculateAvoidanceVector();
         travelVector = towardTarget + avoidObsticals;
 
-        /* TURN TOWARD TRAVEL VECTOR (START) */
-        Vector3 travelVector_localHorizontal = Vector3.ProjectOnPlane(travelVector, transform.up);
-        Vector3 travelVector_localAzumith = Vector3.ProjectOnPlane(travelVector, transform.right);
-
-        angle_x = Vector3.SignedAngle(transform.forward, travelVector_localHorizontal, transform.up);
-        angle_y = Vector3.SignedAngle(transform.forward, travelVector_localAzumith, transform.right);
-        if (angle_y > 90)
-        {
-            angle_y = 180 - angle_y;
-        }
-        else if (angle_y < -90)
-        {
-            angle_y = -180 - angle_y;
-        }
-
-        //Turn if we're not yet aligned with the travel vector (within accceptancce margin)
-        if (angle_x > 5 || angle_x < -5 || angle_y > 5 || angle_y < -5)
-        {//our angle isn't within 5 deg of the target vector yet) {
-
-            if (rb.angularVelocity.magnitude > maxRadV_path)
-            {
-                flightControl.SetYaw(0);
-                flightControl.SetPitch(0);
-            }
-            else
-            {
-                if (angle_x < 5.0f)
-                {
-                    flightControl.SetYaw(-1);
-                }
-                else if (angle_x > 5.0f)
-                {
-                    flightControl.SetYaw(1);
-                }
-                else
-                {
-                    flightControl.SetYaw(0);
-                }
-
-                if (angle_y < -5.0f)
-                {
-                    flightControl.SetPitch(-1);
-                }
-                else if (angle_y > 5.0f)
-                {
-                    flightControl.SetPitch(1);
-                }
-                else
-                {
-                    flightControl.SetPitch(0);
-                }
-            }
-
-        }
-        else
-        {
-            flightControl.SetPitch(0);
-            flightControl.SetYaw(0);
-        }
+        RotateTowardVector(travelVector);
 
         /* MOVE ALONG TRAVEL VECTOR (START) */
 
@@ -368,64 +424,7 @@ public class AiNeutral : MonoBehaviour
         travelVector = awayFromTarget + avoidObsticals;
 
         /* TURN TOWARD TRAVEL VECTOR (START) */
-        Vector3 travelVector_localHorizontal = Vector3.ProjectOnPlane(travelVector, transform.up);
-        Vector3 travelVector_localAzumith = Vector3.ProjectOnPlane(travelVector, transform.right);
-
-        angle_x = Vector3.SignedAngle(transform.forward, travelVector_localHorizontal, transform.up);
-        angle_y = Vector3.SignedAngle(transform.forward, travelVector_localAzumith, transform.right);
-        if (angle_y > 90)
-        {
-            angle_y = 180 - angle_y;
-        }
-        else if (angle_y < -90)
-        {
-            angle_y = -180 - angle_y;
-        }
-
-        //Turn if we're not yet aligned with the travel vector (within accceptancce margin)
-        if (angle_x > 20 || angle_x < -20 || angle_y > 20 || angle_y < -20)
-        {//our angle isn't within 5 deg of the target vector yet) {
-
-            if (rb.angularVelocity.magnitude > maxRadV_path)
-            {
-                flightControl.SetYaw(0);
-                flightControl.SetPitch(0);
-            }
-            else
-            {
-                if (angle_x < 5.0f)
-                {
-                    flightControl.SetYaw(-1);
-                }
-                else if (angle_x > 5.0f)
-                {
-                    flightControl.SetYaw(1);
-                }
-                else
-                {
-                    flightControl.SetYaw(0);
-                }
-
-                if (angle_y < -5.0f)
-                {
-                    flightControl.SetPitch(-1);
-                }
-                else if (angle_y > 5.0f)
-                {
-                    flightControl.SetPitch(1);
-                }
-                else
-                {
-                    flightControl.SetPitch(0);
-                }
-            }
-
-        }
-        else
-        {
-            flightControl.SetPitch(0);
-            flightControl.SetYaw(0);
-        }
+        RotateTowardVector(travelVector);
 
         /* MOVE ALONG TRAVEL VECTOR (START) */
 
@@ -460,67 +459,62 @@ public class AiNeutral : MonoBehaviour
 
         travelVector = Vector3.Normalize(towardTargetPoint + perpendicularToTarget + CalculateAvoidanceVector());
 
-        Vector3 travelVector_localHorizontal = Vector3.ProjectOnPlane(travelVector, transform.up);
-        Vector3 travelVector_localAzumith = Vector3.ProjectOnPlane(travelVector, transform.right);
-
-        angle_x = Vector3.SignedAngle(transform.forward, travelVector_localHorizontal, transform.up);
-        angle_y = Vector3.SignedAngle(transform.forward, travelVector_localAzumith, transform.right);
-        if (angle_y > 90)
-        {
-            angle_y = 180 - angle_y;
-        }
-        else if (angle_y < -90)
-        {
-            angle_y = -180 - angle_y;
-        }
-
-        if (angle_x > 5 || angle_x < -5 || angle_y > 5 || angle_y < -5)
-        {//our angle isn't within 5 deg of the target vector yet) {
-
-            if (rb.angularVelocity.magnitude > maxRadV_orbit)
-            {
-                flightControl.SetYaw(0);
-                flightControl.SetPitch(0);
-            }
-            else
-            {
-                if (angle_x < 5.0f)
-                {
-                    flightControl.SetYaw(-1);
-                }
-                else if (angle_x > 5.0f)
-                {
-                    flightControl.SetYaw(1);
-                }
-                else
-                {
-                    flightControl.SetYaw(0);
-                }
-
-                if (angle_y < -5.0f)
-                {
-                    flightControl.SetPitch(-1);
-                }
-                else if (angle_y > 5.0f)
-                {
-                    flightControl.SetPitch(1);
-                }
-                else
-                {
-                    flightControl.SetPitch(0);
-                }
-            }
-
-        }
-        else
-        {
-            flightControl.SetPitch(0);
-            flightControl.SetYaw(0);
-        }
+        RotateTowardVector(travelVector);
 
         if (flightControl.inputVertical <= 0)
         {
             if (Vector3.Distance(transform.position, target.transform.position) < targetOrbitDistance && rb.velocity.magnitude > orbitSpeedLimit)
+            {
+                StopForwardMotion();
+            }
+            else
+            {
+                if (rb.angularVelocity.magnitude < maxRadV_orbit)
+                {
+                    MoveForward();
+                }
+            }
+        }
+        else
+        {
+            StopForwardMotion();
+        }
+    }
+
+    void CircularOrbitTargetBehavior() {
+        //Set up a set of 4 waypoints around our target object, each one equidistant and at the target distance
+        //TODO Refator this for efficiency and scalability
+        if(orbitStepPositions.Count == 0) {
+            orbitStep = 0;
+            orbitStepPositions.Add(target.transform.position + new Vector3(targetOrbitDistance, 0, 0));
+            orbitStepPositions.Add(target.transform.position + new Vector3(0, 0, targetOrbitDistance));
+            orbitStepPositions.Add(target.transform.position + new Vector3(-targetOrbitDistance, 0, 0));
+            orbitStepPositions.Add(target.transform.position + new Vector3(0, 0, -targetOrbitDistance));
+        }
+
+        //then move from point to point around the object
+
+        float distanceToOrbitStep = Vector3.Distance(transform.position, orbitStepPositions[orbitStep]);
+
+        if(distanceToOrbitStep < 5) {       //If we're close enough to the current orbit step point, target the next one
+            if(orbitStep < orbitStepPositions.Count - 1) {
+                orbitStep++;
+            }
+            else {
+                orbitStep = 0;
+            }
+        }
+        else {      //If we're not at the current orbit step point yet, get there.
+            travelVector = Vector3.Normalize(orbitStepPositions[orbitStep] - transform.position + CalculateAvoidanceVector());
+        }
+        //generalize this algorithm and add more points to better approximate a circle
+
+        RotateTowardVector(travelVector);
+
+        if (flightControl.inputVertical <= 0)
+        {
+            //If we're close to the orbit and we're travelling too quikly, stop the engines
+            if (Vector3.Distance(transform.position, target.transform.position) < 1.5f*targetOrbitDistance && rb.velocity.magnitude > orbitSpeedLimit)
             {
                 StopForwardMotion();
             }
