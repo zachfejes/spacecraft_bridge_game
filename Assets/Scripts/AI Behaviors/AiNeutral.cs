@@ -483,7 +483,7 @@ public class AiNeutral : MonoBehaviour
 
     void CircularOrbitTargetBehavior() {
         //Set up a set of 4 waypoints around our target object, each one equidistant and at the target distance
-        //TODO Refator this for efficiency and scalability
+        //TODO: Refator this for code efficiency and scalability (preferably a map or hash of standard positions)
         if(orbitStepPositions.Count == 0) {
             orbitStep = 0;
             orbitStepPositions.Add(target.transform.position + new Vector3(targetOrbitDistance, 0, 0));
