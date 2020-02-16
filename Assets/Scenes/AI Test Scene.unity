@@ -303,7 +303,7 @@ Prefab:
     - target: {fileID: 114726064980451164, guid: 00fa641eb7296c04dbf5cfff0fef90e7,
         type: 2}
       propertyPath: currentAction
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4105846206204662, guid: 00fa641eb7296c04dbf5cfff0fef90e7, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -374,6 +374,15 @@ Prefab:
       propertyPath: scannerManager
       value: 
       objectReference: {fileID: 1718253834}
+    - target: {fileID: 1039795928239484, guid: 00fa641eb7296c04dbf5cfff0fef90e7, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114726064980451164, guid: 00fa641eb7296c04dbf5cfff0fef90e7,
+        type: 2}
+      propertyPath: targetOrbitDistance
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114995713344222634, guid: 00fa641eb7296c04dbf5cfff0fef90e7, type: 2}
     - {fileID: 114555449305727690, guid: 00fa641eb7296c04dbf5cfff0fef90e7, type: 2}
@@ -847,6 +856,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2ec4804be6d721499393e9c1481dc03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalScanningRange: 100
-  longScanningRange: 0
+  targetInfoPrefab: {fileID: 0}
+  scanners: []
   trackedObjects: []
