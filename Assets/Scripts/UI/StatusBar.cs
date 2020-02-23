@@ -63,7 +63,7 @@ public class StatusBar : MonoBehaviour
         if (relatedShieldManager && relatedShieldManager.shieldStrength.Length > 0)
         {
             shield.gameObject.SetActive(true);
-            percentShield = relatedShieldManager.shieldStrength[0] / 100;
+            percentShield = relatedShieldManager.shieldStrength[0] / relatedShieldManager.maxShieldStrength[0];
             float parentWidth = shield.sizeDelta.x;
             float parentHeight = shield.sizeDelta.y;
             float valueWidth = parentWidth * percentShield;

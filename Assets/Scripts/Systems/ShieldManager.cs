@@ -6,16 +6,19 @@ public class ShieldManager : MonoBehaviour {
 
 	public Shield[] shields;
 	public float[] shieldStrength;
+	public float[] maxShieldStrength;
 	public Transform shieldFlarePrefab;
 
 
 	void Start() {
 		shields = transform.GetComponentsInChildren<Shield>();
 		shieldStrength = new float[shields.Length];
+		maxShieldStrength = new float[shields.Length];
 
 		for(int i = 0; i < shields.Length; i++) {
 			shields[i].SetShieldManager(this);
 			shieldStrength[i] = shields[i].GetShieldHP();
+			maxShieldStrength[i] = shields[i].GetShieldMaxHP();
 		}
 	}
 

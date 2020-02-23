@@ -25,6 +25,10 @@ public class Shield : MonoBehaviour {
         return(shieldHP);
     }
 
+    public float GetShieldMaxHP() {
+        return (maxShieldHP);
+    }
+
     public float DamageShield(float damage) {
         if(shieldHP - damage <= 0) {
             shieldHP = 0;
